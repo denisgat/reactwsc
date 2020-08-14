@@ -2,91 +2,73 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import TopMenu from './TopMenu';
+// import MenuButton from './MenuButton';
 
 // Importing png files from img folder
 
-import WorkerServicesLogo from '../img/logo-ws-green-web640x95.png';
-import AdvantageResourceLogo from '../img/AdvantageResourceIncLogo.PNG';
-import Worker401kLogo from '../img/Worker401kLogo.PNG';
+import WorkerServicesLogo from '../img/logos/logo-ws-green-web640x95.png';
+
+import {Link} from 'react-router-dom';
+
+
 
 
 //CSS (styled-components)
 
+
 const Nav = styled.nav`
     /* Dimensions and color of nav bar */
-    width: 100%;
-    height: 6rem;
-    border-bottom: 14px solid #448a03;
-    padding: 18px 10px;
+    width: 100vw;
+    height: 130px;
+    border-bottom: 14px solid #336702;
+    padding: 18px 20px;
     display: flex;
     justify-content: center;
+    box-sizing: border-box; 
+    font-size: 21px;
 
-    /* Changing WorkerServices logo image properties*/
+    /* WorkerServices logo properties*/
     #mainLogo{
-        max-width: 365px;
-        margin-right: 90px;
+        max-width: 475px;
+        margin-top: 10px;
+        margin-right: 39px;
         margin-left: 30px;
+        padding-right: 30px;
+        padding-left: 0px;
     }
 
-    li img{
-        max-width: 23px;
+    a, a:hover{
+        border: none;
+        outline:none;
+        text-decoration:none;
+        color:inherit;
     }
 
-    /* @media (max-width: 1000px){
-        .Mainlogo{
-
-        }
+    /* @media screen and (min-width: 0px) and (max-width: 1450px){
+        
     } */
-
-    /* why ul here */
-    ul{
-        list-style: none;
-        display: flex;
-        flex-flow: row nowrap;
-    }
-    
-    /* why li here */
-    li{
-        padding: 18px 20px;
-    }
-
-    /* changes the mesurement of login button */
-    #login {
-        margin-top: 13px;
-        margin-left: 20px;
-        width: 90px;
-        height: 2rem;
-        padding: 2px;
-        background-color: blue;
-        color: white;
-    }
-
 `;
+
+// Function for the top Navigation bar
+
 
 
 const TopNavbar = () => {
     return (
-        <div>
+        <header>
             <Nav>
                 <div>
-                    <img className='container' id='mainLogo' src={WorkerServicesLogo} alt='WorkerServicesLogo' />
+                    <Link to='/'>
+                        <img className='' id='mainLogo' src={WorkerServicesLogo} alt='WorkerServicesLogo' />
+                    </Link>
                 </div>
-                <ul>
-                    <li>Home</li>
-                    <li>Industries</li>
-                    <li>Application</li>
-                    <li>Resources</li>
-                    <li>
-                        <img src={AdvantageResourceLogo} alt='AdvantageResourceLogo' />
-                    </li>
-                    <li>
-                        <img src={Worker401kLogo} alt='Worker401kLogo' />
-                    </li>
-                    <li className='btn' id='login'>Login</li>
-                </ul>
+                {/* <MenuButton/> */}
+                <TopMenu/>
             </Nav>
-        </div>
+        </header>
     );
 };
+
 
 export default TopNavbar;
