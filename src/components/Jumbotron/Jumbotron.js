@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import JumboPic from '../../components/img/pics/resources.jpg';
 
 const Jumbo = styled.div`
-
     #HomePic{
         /* background-color: darkgray; */
         height: 43vh;
@@ -12,8 +10,9 @@ const Jumbo = styled.div`
         padding: 0px;
     }
 
-    .background{
+    .text{
         background: rgba(0,0,0,.3);
+        backdrop-filter: blur(1px);
         color: white;
         display: flex;
         justify-content: center;
@@ -24,21 +23,29 @@ const Jumbo = styled.div`
     }
 
     h1{
-        font-size: 3.75rem;
+        font-size: 3.9rem;
         text-align: center;
-        max-width: 60rem; 
+        max-width: 65rem; 
         line-height: 1;
-    }
-`;
+        text-shadow:4px 0 0 rgba(0,0,0,.8)
 
-const Jumbotron = () => {
+    }
+
+    @media screen and (min-width: 0px) and (max-width: 769px){
+        h1{
+            font-size: 1.5rem;
+        }
+    }
+
+`;
+const Jumbotron = (props) => {
     // console.log(window.location.pathname.split('/')[1])
     return (
         <div>
             <Jumbo >
-                <div id='HomePic' className='container-fluid' style={{ backgroundImage: `url(${JumboPic})` }}  >
-                    <div className='background'>
-                        <h1>Application</h1>
+                <div id='HomePic' className='container-fluid' style={{ backgroundImage: `url(${props.jumboPic})` }}  >
+                    <div className='text'>
+                        <h1>{props.jumboName}</h1>
                     </div>
                 </div>
             </Jumbo>

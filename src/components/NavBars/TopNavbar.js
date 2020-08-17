@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TopMenu from './TopMenu';
+import MenuButton from './MenuButton';
 // import MenuButton from './MenuButton';
 
 // Importing png files from img folder
@@ -45,9 +46,16 @@ const Nav = styled.nav`
         color:inherit;
     }
 
-    /* @media screen and (min-width: 0px) and (max-width: 1450px){
-        
-    } */
+    @media screen and (min-width: 0px) and (max-width: 769px){
+        #mainLogo{
+            max-width: 260px;
+            padding-top: 15px;
+            margin-right: 5px;
+            margin-left: 30px;
+            padding-right: 30px;
+            padding-left: 0px;
+        }
+    }
 `;
 
 // Function for the top Navigation bar

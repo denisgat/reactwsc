@@ -40,23 +40,28 @@ const BottomNav = () => {
         <BottomNavStyling>
             <ul className='list'>
                 <li>
-                    <Link to='/application/remote-employees'>
-                        Remote Employees 
+                    <Link to='/industries/government'>
+                        Government 
                     </Link>
                 </li>
                 <li>
-                    <Link to='/application/displaced-workers'>
-                        Displaced Employees 
+                    <Link to='/industries/construction'>
+                        Construction
                     </Link>
                 </li>
                 <li>
-                    <Link to='/application/compliance'>
-                        Compliance
+                    <Link to='/industries/manufacturing'>
+                        Manufacturing
                     </Link>
                 </li>
                 <li>
-                    <Link to='/application/forms-library'>
-                        Forms Library
+                    <Link to='/industries/associations'>
+                        Associations
+                    </Link>
+                </li>
+                <li>
+                    <Link to='/industries/others'>
+                        Others
                     </Link> 
                 </li>
             </ul>

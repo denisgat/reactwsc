@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
-const Styling = styled.main`
-    width: 100%;
-`;
 
 const Container = styled.span`
+    width: 100%;
     .container{
         max-width: 70%;
         margin: 0px auto;
@@ -19,7 +18,7 @@ const Container = styled.span`
         font-size: 22px;
     }
 
-    button{
+    .btn{
         background-color: #336702;
         color: white;
         position: absolute;
@@ -38,7 +37,7 @@ const Container = styled.span`
             font-size: 20px;
         }
 
-        button{
+        .btn{
             left: 10%;
             width: 9rem;
             height: 3rem;
@@ -55,7 +54,7 @@ const Container = styled.span`
             font-size: small;
         }
 
-        button{
+        .btn{
             left: 40%; 
             width: 8rem;
             height: 2rem;
@@ -67,7 +66,6 @@ const Container = styled.span`
 
 function HomeBody() {
     return (
-        <Styling>
             <Container>
                 <div className='container mb-5'>
                     <div className='mt-5'>
@@ -82,50 +80,49 @@ function HomeBody() {
                             <p className='pt-3 pb-5'>
                                 The best way to fix a problem is don’t have it.
                             </p>
-                            <button className='btn'>
+                            <Link to='/resources/our-principles' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>AR/WS/W401k</strong></p>
                             <p className='pt-3 pb-5'>
                                 One company, three service offerings.
                             </p>
-                            <button className='btn'>
+                            <Link to='/resources/ar-w401k' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>News & Events</strong></p>
                             <p className='pt-3 pb-5'>
                                 News, Articles, Tips and Events by Advantage Resource
                             </p>
-                            <button className='btn'>
+                            <Link to='/resources/news' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className=' col-lg-2 p-0 mx-1'>
                             <p><strong>FAQ</strong></p>
                             <p className='pt-3 pb-5'>
                                 Answers to some WS questions asked more than once.
                             </p>
-                            <button className='btn'>
+                            <Link to='/resources/faq' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>Contact Us</strong></p>
                             <p className='pt-3 pb-5'>
                                 How to get in touch with someone to talk about WorkerServices.
                             </p>
-                            <button className='btn'>
+                            <Link to='/resources/contact-us' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </Container>
-        </Styling>
     );
 }
 

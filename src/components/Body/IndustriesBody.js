@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Styling = styled.main`
     width: 100%;
@@ -19,7 +20,7 @@ const Container = styled.span`
         font-size: 22px;
     }
 
-    button{
+    .btn{
         background-color: #336702;
         color: white;
         position: absolute;
@@ -30,21 +31,6 @@ const Container = styled.span`
         font-size: 22px;
     }
 
-    /* @media screen and (min-width: 1901px){
-        .grid{
-            padding-left: 100px;
-        }
-        p{
-            font-size: 20px;
-        }
-
-        button{
-            left: 35%;
-            width: 9rem;
-            height: 3rem;
-            font-size: 22px;
-        }
-    } */
 
     @media screen and (min-width: 1200px) and (max-width: 1900px){
         .grid{
@@ -54,7 +40,7 @@ const Container = styled.span`
             font-size: 20px;
         }
 
-        button{
+        .btn{
             left: 10%;
             width: 9rem;
             height: 3rem;
@@ -71,7 +57,7 @@ const Container = styled.span`
             font-size: small;
         }
 
-        button{
+        .btn{
             left: 40%; 
             width: 8rem;
             height: 2rem;
@@ -102,45 +88,45 @@ function HomeBody() {
                             <p className='pt-3 pb-5'>
                                 Proactive documentation and communication is key to contract success, and in satisfying the Contracting Officer.
                             </p>
-                            <button className='btn'>
+                            <Link to='/industries/government' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>Construction</strong></p>
                             <p className='pt-3 pb-5'>
                                 When work is done on a job site or factory floor, not on a computer screen.
                             </p>
-                            <button className='btn'>
+                            <Link to='/industries/construction' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>Manufacturing</strong></p>
                             <p className='pt-3 pb-5'>
                                 People pay for the goods being built, not the paper being pushed. 
                             </p>
-                            <button className='btn'>
+                            <Link to='/industries/manufacturing' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className=' col-lg-2 p-0 mx-1'>
                             <p><strong>Associations</strong></p>
                             <p className='pt-3 pb-5'>
                                 Association membership tools should be intuitive, beneficial, and efficient..
                             </p>
-                            <button className='btn'>
+                            <Link to='/industries/associations' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                         <div className='col-lg-2 p-0 mx-1'>
                             <p><strong>Others</strong></p>
                             <p className='pt-3 pb-5'>
                                 Organizations of various shape, size, and purpose benefit from WS.
                             </p>
-                            <button className='btn'>
+                            <Link to='/industries/others' className='btn'>
                                 Learn More
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

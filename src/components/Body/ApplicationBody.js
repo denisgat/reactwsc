@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 
 const Container = styled.span`
@@ -19,7 +20,7 @@ const Container = styled.span`
         font-size: 21px;
     }
 
-    button{
+    .btn{
         background-color: #336702;
         color: white;
         position: absolute;
@@ -36,7 +37,7 @@ const Container = styled.span`
             font-size: 20px;
         }
 
-        button{
+        .btn{
             left: 20%;
             width: 9rem;
             height: 3rem;
@@ -50,7 +51,7 @@ const Container = styled.span`
             font-size: small;
         }
 
-        button{
+        .btn{
             left: 40%; 
             width: 8rem;
             height: 2rem;
@@ -79,36 +80,36 @@ function HomeBody() {
                         <p className='pt-3 pb-5'>
                             The workforce is spread out and mobile, but the company office is not.
                             </p>
-                        <button className='btn'>
+                        <Link to='/application/remote-employees' className='btn'>
                             Learn More
-                            </button>
+                        </Link>
                     </div>
                     <div className='col-lg-3 p-0'>
                         <p><strong>Displaced Workers</strong></p>
                         <p className='pt-3 pb-5'>
                             Inherited Service Contract Act (SCA/SCLS) employees work for you now.
-                            </p>
-                        <button className='btn'>
+                        </p>
+                        <Link to='/application/displaced-workers' className='btn'>
                             Learn More
-                            </button>
+                        </Link>
                     </div>
                     <div className='col-lg-3 p-0'>
                         <p><strong>Compliance</strong></p>
                         <p className='pt-3 pb-5'>
                             If you're not in compliance, nothing else makes any difference.
-                            </p>
-                        <button className='btn'>
+                        </p>
+                        <Link to='/application/compliance' className='btn'>
                             Learn More
-                            </button>
+                        </Link>
                     </div>
                     <div className=' col-lg-3 p-0'>
                         <p><strong>Forms Library</strong></p>
                         <p className='pt-3 pb-5'>
                             A sampling of the fillable form submission process.
-                            </p>
-                        <button className='btn'>
+                        </p>
+                        <Link to='/application/forms-library' className='btn'>
                             Learn More
-                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

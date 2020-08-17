@@ -18,6 +18,7 @@ const FooterStyle = styled.footer`
         font-size: 15px;
 
     }
+    
     a{
         border: none;
         outline:none;
@@ -28,6 +29,7 @@ const FooterStyle = styled.footer`
     .footerscript{
         margin-bottom: 0px;
     }
+
 
     @media screen and (min-width: 0px) and (max-width: 1000px){
         width: 100vw;
