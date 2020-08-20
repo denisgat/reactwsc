@@ -2,22 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const RemoteStyling = styled.div`
-    font-size: 23px;
-
-    .container{
-        min-width: 59%;
-        margin: 3.5rem auto 10rem;
-    }
-
-    ul{
-        padding-left: 5rem;
-    }
 `;
 
 const RemoteEmployees = () => {
     return (
         <RemoteStyling >
-            <div className='container'>
+            <div className='subpage container'>
                 <p>
                     For a company with a decentralized work force, providing required notices and 
                     documents to employees can be challenging. Receiving paperwork from these same remote employees, 

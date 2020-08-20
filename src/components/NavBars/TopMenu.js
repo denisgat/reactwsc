@@ -7,26 +7,24 @@ import Worker401kLogo from '../img/logos/Worker401kLogo.PNG';
 
 const TopMenuStyle = styled.div`
 
+
     /* AR and W401k logo properties */
     li img{
-        max-width: 35px;
+        max-width: 30px;
     }
 
-    /*  */
+    /* Menu Properties */
     ul{
         list-style: none;
         display: flex;
         flex-flow: row nowrap;
-        margin-top: 10px;
+        margin-top: 0px;
     }
     
-    /*  */
     li{
-        margin: 10px 3px 0px;
-        padding: 0px 20px;
-        padding-top: 5px;
-        height: 50px;
-        
+        margin: 0px 3px 0px;
+        padding: 5px 18px 0px;
+        height: 40px;
     }
 
     li:hover{
@@ -41,13 +39,11 @@ const TopMenuStyle = styled.div`
 
     /*Login button properties */
     #login {
-        margin-left: 20px;
-        margin-top: 7px;
-        width: 130px;
-        height: 3rem;
-        padding: 6px;
+        margin-left: 13px;
+        height: 2.3rem;
         background-color: blue;
         color: white;
+        font-size: 17px;
     }
 
     #login:hover{
@@ -55,6 +51,8 @@ const TopMenuStyle = styled.div`
         font-weight: bold;
         opacity: .8;
     }
+
+    /* Dropdown properties */
 
     .dropdown:hover .dropdown-menu{
         display:block;
@@ -66,13 +64,36 @@ const TopMenuStyle = styled.div`
     }
 
     .dropdown-item{
-        font-size: 22px;
+        font-size: 17px;
         padding: 15px;
     }
 
     .dropdown-item:hover{
         background-color: #336702;
         color: white;
+    }
+
+    @media screen and (min-width: 0px) and (max-width: 1450px){
+        li{
+            margin: 10px 0px 10px 0px;
+            padding: 0px 10px;
+            padding-top: 10px;
+            height: 40px;
+            font-size: small;    
+        }
+
+        li img{
+        max-width: 25px;
+        }
+
+        #login {
+        margin-top: 13px;
+        width: 50px;
+        height: 2rem;
+        padding: 5.5px;
+        background-color: blue;
+        color: white;
+        }
     }
 `;
 

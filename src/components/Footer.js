@@ -53,7 +53,7 @@ const Footer = () => {
                     <a href='https://www.advantageresource.com/'> Advantage Resource </a>
                     <span>&bull;</span>
                     <a href='/'>    info@workerservices.com </a>
-                     &bull; Phone:
+                     &bull; Phone :
                     <a href='/'> (859) 313-5472</a>
                </p>
             </div>

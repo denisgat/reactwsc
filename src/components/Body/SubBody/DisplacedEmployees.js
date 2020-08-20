@@ -4,22 +4,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DisplacedStyling = styled.div`
-    font-size: 23px;
-
-    .container{
-        min-width: 59%;
-        margin: 3.5rem auto 10rem;
-    }
-
-    ul{
-        padding-left: 5rem;
-    }
 `;
 
 const DisplacedEmployees = () => {
     return (
         <DisplacedStyling >
-            <div className='container'>
+            <div className='subpage container'>
                 <p>
                 Service Contract Act (SCA/SCLS) employees are unique, in that when a contractor gets a new SCA/SCLS job, the contract often brings with it an inherited set of new employees. For the inherited worker, life may not initially change much: on Friday worked for Company A, on Monday working for Company B. The only noticeable difference may be the name of who signs the paycheck.
                 </p>

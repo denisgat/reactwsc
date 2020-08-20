@@ -3,22 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DisplacedStyling = styled.div`
-    font-size: 23px;
-
-    .container{
-        min-width: 59%;
-        margin: 3.5rem auto 10rem;
-    }
-
-    ul{
-        padding-left: 5rem;
-    }
 `;
 
 const DisplacedEmployees = () => {
     return (
         <DisplacedStyling >
-            <div className='container'>
+            <div className='subpage container'>
                 <p>
                 There are regulatory agencies, federal, state, and local authorities, and contractual requirements. Compliance is only easy if you don’t care how much money you spend.  
                 </p>

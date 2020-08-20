@@ -23,9 +23,9 @@ const Jumbo = styled.div`
     }
 
     h1{
-        font-size: 3.9rem;
+        font-size: 3rem;
         text-align: center;
-        max-width: 65rem; 
+        max-width: 50rem; 
         line-height: 1;
         text-shadow:4px 0 0 rgba(0,0,0,.8)
 
@@ -33,7 +33,7 @@ const Jumbo = styled.div`
 
     @media screen and (min-width: 0px) and (max-width: 769px){
         h1{
-            font-size: 1.5rem;
+            font-size: 1.45rem;
         }
     }
 

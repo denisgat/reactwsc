@@ -17,9 +17,10 @@ import governmentPic from './components/img/pics/government.jpg'
 
 
 //css
-import './App.css'
+import './App.scss'
 
 //components
+import Login from './components/Login'
 import TopNavbar from './components/NavBars/TopNavbar';
 import Jumbotron from './components/Jumbotron/Jumbotron';
 
@@ -50,22 +51,23 @@ class App extends React.Component {
 
     }
 
-    componentDidMount() {
-        this.setState({
-        })
-    }
-
 
     render() {
-        // console.log(this.state.innerpath,this.state.outerpath)
 
         return (
             <BrowserRouter className='App'>
                 <TopNavbar />
                 <Switch>
+
+                    {/* Home route */}
                     <Route exact path='/'>
                         <Jumbotron jumboPic = {homePic} jumboName = 'A Communication Resource for a Company and its Employees' />
                         <HomeBody />
+                    </Route>
+
+                    {/* Login route */}
+                    <Route exact path='/login'>
+                        <Login/>
                     </Route>
 
                     {/* Application Routes */}

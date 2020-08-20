@@ -3,22 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DisplacedStyling = styled.div`
-    font-size: 23px;
-
-    .container{
-        min-width: 59%;
-        margin: 3.5rem auto 10rem;
-    }
-
-    ul{
-        padding-left: 5rem;
-    }
 `;
 
 const DisplacedEmployees = () => {
     return (
         <DisplacedStyling >
-            <div className='container'>
+            <div className='subpage container'>
                 <p>
                 If a form can be filled out with a pen, it can be converted to a fillable form and posted to WorkerServices. If assistance is needed with this, contact us to have us convert, create, and post the form for you.
                 </p>
