@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Jumbo = styled.div`
+
     #HomePic{
         /* background-color: darkgray; */
         height: 43vh;
@@ -46,6 +47,12 @@ const Jumbotron = (props) => {
                 <div id='HomePic' className='container-fluid' style={{ backgroundImage: `url(${props.jumboPic})` }}  >
                     <div className='text'>
                         <h1>{props.jumboName}</h1>
+                        {props.isLoggedIn
+                        ?
+                        <div className='modifiedbtn modifiedscript edit'>Edit</div>
+                        :
+                        ''
+                        }
                     </div>
                 </div>
             </Jumbo>

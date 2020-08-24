@@ -10,8 +10,8 @@ const Body = styled.span`
 function HomeBody() {
     return (
         <Body>
-            <div className='fourrow mb-5'>
-                <div className='topscript mt-5'>
+            <div className='fourrow'>
+                <div className='topscript'>
                     <div className='col-12'>
                         <p>
                             WorkerServices can be utilized by any organization with the need for flexibility in
@@ -20,10 +20,10 @@ function HomeBody() {
                         </p>
                     </div>
                 </div>
-                <div className='grid row text-center mt-5'>
+                <div className='grid row text-center'>
                     <div className='column col-lg-3 p-0'>
                         <p><strong>Remote Employees</strong></p>
-                        <p className='pt-3 pb-5'>
+                        <p className='subbodyheader'>
                             The workforce is spread out and mobile, but the company office is not.
                             </p>
                         <Link to='/application/remote-employees' className='btn'>
@@ -32,7 +32,7 @@ function HomeBody() {
                     </div>
                     <div className='column col-lg-3 p-0'>
                         <p><strong>Displaced Workers</strong></p>
-                        <p className='pt-3 pb-5'>
+                        <p className='subbodyheader'>
                             Inherited Service Contract Act (SCA/SCLS) employees work for you now.
                         </p>
                         <Link to='/application/displaced-workers' className='btn'>
@@ -41,7 +41,7 @@ function HomeBody() {
                     </div>
                     <div className='column col-lg-3 p-0'>
                         <p><strong>Compliance</strong></p>
-                        <p className='pt-3 pb-5'>
+                        <p className='subbodyheader'>
                             If you're not in compliance, nothing else makes any difference.
                         </p>
                         <Link to='/application/compliance' className='btn'>
@@ -50,7 +50,7 @@ function HomeBody() {
                     </div>
                     <div className='column col-lg-3 p-0'>
                         <p><strong>Forms Library</strong></p>
-                        <p className='pt-3 pb-5'>
+                        <p className='subbodyheader'>
                             A sampling of the fillable form submission process.
                         </p>
                         <Link to='/application/forms-library' className='btn'>

@@ -82,29 +82,7 @@ const Nav = styled.nav`
 
 
 
-class TopNavbar extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {width: 0, height: 0}
-
-        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);    
-    }
-
-    componentDidMount(){
-        this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWinodwDimensions)
-    }
-
-    // componentWillMount(){
-    //     window.removeEventListener('resize', this.updateWindowDimensions)
-    // }
-
-    updateWindowDimensions(){
-        this.setState({width:window.innerWidth, height: window.innerHeight});
-    }
-
-    render() {
-        // console.log(this.state.width)
+const TopNavbar = (props) => {
         return (
             <header>
                 <Nav>
@@ -113,14 +91,16 @@ class TopNavbar extends React.Component {
                             <img className='' id='mainLogo' src={WorkerServicesLogo} alt='WorkerServicesLogo' />
                         </Link>
                     </div>
-                    {this.state.width <= 769 
-                    ?<MenuButton/> 
-                    :<TopMenu />
+                    {props.screenWidth <= 769 
+                    ?<MenuButton /> 
+                    :<TopMenu 
+                        isLoggedIn = {props.isLoggedIn} 
+                        handleLog={props.handleLog} 
+                    />
                     }
                 </Nav>
             </header>
         );
-    }
 };
 
 

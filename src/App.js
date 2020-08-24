@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
 //pics
 import homePic from './components/img/pics/home.jpg';
@@ -46,28 +47,141 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoggedIn: false,
+            screenWidth: 0,
+            token: '',
+            user: {},
+            menus: [],
+            submenus: []
+        }
+
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this); 
+        this.handleLog = this.handleLog.bind(this);   
+        this.setBearToken = this.setBearToken.bind(this);
+    }
+
+  async  componentDidMount(){
+
+        //calling collection of menu's from database
+        let menusCall = await axios.get('http://127.0.0.1:8000/api/allmenus')
+        .then(response => {
+          // handle success
+        //   console.log(response.data.data)
+          return response.data.data
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+
+        let submenusCall = await axios.get('http://127.0.0.1:8000/api/allsubmenus')
+        .then(response => {
+          // handle success
+        //   console.log(response.data)
+          return response.data
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions)
+
+        // Setting up local Storage
+        if(window.localStorage.token){
+            this.setState({
+                token: JSON.parse(window.localStorage.token),
+                isLoggedIn: JSON.parse(window.localStorage.isLoggedIn),
+                user: JSON.parse(window.localStorage.user)
+            })
+        }
+
+        // setting menu to state 
+        this.setState({
+            menus: menusCall,
+            submenus: submenusCall
+          })
+    }
+
+    updateWindowDimensions(){
+        this.setState({screenWidth:window.innerWidth});
+    }
+
+  async  handleLog(){
+        //Logs User out of backend
+        console.log(this.state)
+        if(this.state.isLoggedIn === true){
+
+            const data = {
+            }
+
+            const config = {
+                headers:{
+                'content-type': 'multipart/form-data',
+                'Authorization': 'Bearer ' + this.state.token
+                }
+            }
+
+            await axios.post('http://127.0.0.1:8000/api/logout', data, config)
+            .then(response => {
+              window.localStorage.clear();
+                //toggles Front end for logging in and out
+                this.setState({isLoggedIn: false})
+                // console.log('isLogged:', this.state.isLoggedIn)
+                console.log('loggedout succesfully')
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
 
         }
 
+        else{
+            this.setState({isLoggedIn: true})
+        }
+
+
+
+    }
+
+    setBearToken(token, user){
+        this.setState({
+            token: token,
+            user: user
+        })
     }
 
 
     render() {
-
+        console.log(this.state)
         return (
             <BrowserRouter className='App'>
-                <TopNavbar />
+                <TopNavbar 
+                    isLoggedIn = {this.state.isLoggedIn}
+                    screenWidth = {this.state.screenWidth}
+                    handleLog = {this.handleLog}
+                />
                 <Switch>
 
                     {/* Home route */}
                     <Route exact path='/'>
-                        <Jumbotron jumboPic = {homePic} jumboName = 'A Communication Resource for a Company and its Employees' />
-                        <HomeBody />
+                        <Jumbotron 
+                            jumboPic = {homePic} 
+                            jumboName = 'A Communication Resource for a Company and its Employees' 
+                            isLoggedIn = {this.state.isLoggedIn}
+                        />
+                        <HomeBody isLoggedIn = {this.state.isLoggedIn}/>
                     </Route>
 
                     {/* Login route */}
                     <Route exact path='/login'>
-                        <Login/>
+                        <Login 
+                            isLoggedIn = {this.state.isLoggedIn}
+                            screenWidth = {this.state.screenWidth}
+                            handleLog = {this.handleLog}
+                            setBearToken={this.setBearToken}
+                        />
                     </Route>
 
                     {/* Application Routes */}

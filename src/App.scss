@@ -9,8 +9,12 @@ html, body{
 
     .topscript{
         max-width: 60%;
-        margin: 0px auto;
+        margin: 30px auto 40px;
         position: relative;
+    }
+
+    .subbodyheader{
+        padding: 10px 0px 45px;
     }
 
     .grid{
@@ -24,10 +28,11 @@ html, body{
         color: white;
         position: absolute;
         bottom: 0px;
-        left: 27%;
+        left: 25%;
         width: 8rem;
         height: 2.5rem;
-        font-size: 15px;
+        font-size: 17px;
+        padding-top: 8px;
     }
 
     .btn:hover{
@@ -48,8 +53,10 @@ html, body{
         }
 
         .btn{
-            left: 9%;
-            font-size: 13px;
+            left: 18%;
+            font-size: 15px;
+            width: 6rem;
+            height: 2rem;
         }
 
         .column {
@@ -101,14 +108,18 @@ html, body{
     .topscript{
         position: relative;
         max-width: 60%;
-        margin: 0px auto;
+        margin: 30px auto 40px;
+    }
+
+    .subbodyheader{
+        padding: 10px 0px 45px;
     }
 
     .grid{
         position: relative;
         max-width: 70%;
         justify-content: center;
-        margin: 0px auto;  
+        margin: 0px auto; 
     }
 
     .btn{
@@ -116,10 +127,11 @@ html, body{
         color: white;
         position: absolute;
         bottom: 0px;
-        left: 20%;
+        left: 18%;
         width: 8rem;
         height: 2.5rem;
         font-size: 15px;
+        padding-top: 10px;
     }
 
     .btn:hover{
@@ -153,7 +165,7 @@ html, body{
         }
 
         .btn{
-            left: 20%; 
+            left: 13%; 
             width: 6rem;
             height: 2rem;
         }
@@ -189,6 +201,8 @@ html, body{
         .btn{
             position: unset;
             margin: 0px auto;
+            width: 7rem;
+            height: 2rem;
         }
 
         p{
@@ -252,3 +266,39 @@ html, body{
         }
     }
 }
+
+// for when logged in features 
+
+    .modifiedbtn{
+        border-radius: 10px;
+        padding: 5px;
+        width: 40px;
+        height: 20px;
+        color: white;
+        :hover{
+        border: none;
+        outline:none;
+        text-decoration:none;
+        }
+
+    }
+
+    .modifiedscript{
+        width: 40px;
+        height: 35px;
+    }
+
+    .edit{
+        background-color: red
+    }
+
+    .more{
+        background-color: #336702
+    }
+
+    // Link, Link:hover{
+    //     border: none;
+    //     outline:none;
+    //     text-decoration:none;
+    //     color:inherit;
+    // }

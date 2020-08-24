@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import axios from 'axios';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
 import Tower from '../components/img/pics/industries.jpg';
@@ -65,11 +65,11 @@ const LoginStyle = styled.div`
 `;
 
 const validateForm = (errors) => {
-  let valid = true;
-  Object.values(errors).forEach(
-    (val) => val.length > 0 && (valid = false)
-  );
-  return valid;
+    let valid = true;
+    Object.values(errors).forEach(
+        (val) => val.length > 0 && (valid = false)
+    );
+    return valid;
 }
 
 class Login extends React.Component {
@@ -81,7 +81,7 @@ class Login extends React.Component {
             password: null,
             token: '',
             user: '',
-            errors:{
+            errors: {
                 email: '',
                 password: '',
             }
@@ -92,63 +92,82 @@ class Login extends React.Component {
 
     handleChange = (event) => {
         event.preventDefault();
-        const {name, value } = event.target;
+        const { name, value } = event.target;
         let errors = this.state.errors;
-    
+
         switch (name) {
-          case 'email': 
-            errors.email = 
-                value.includes(String.fromCharCode(64)) 
-                && value.includes(String.fromCharCode(46))
-                ? ''
-                : 'Email is not valid!';
-            break;
-          case 'password': 
-            errors.password = 
-              value.length < 8
-                ? 'Password must be 8 characters long!'
-                : '';
-            break;
-          default:
-            break;
+            case 'email':
+                errors.email =
+                    value.includes(String.fromCharCode(64))
+                        && value.includes(String.fromCharCode(46))
+                        ? ''
+                        : 'Email is not valid!';
+                break;
+            case 'password':
+                errors.password =
+                    value.length < 8
+                        ? 'Password must be 8 characters or longer!'
+                        : '';
+                break;
+            default:
+                break;
         }
-    
-        this.setState({errors, [name]: value});
-      }
-//async
-     handleSubmit(event) {
+
+        this.setState({ errors, [name]: value });
+    }
+
+    async handleSubmit(event) {
         event.preventDefault();
 
-        if(validateForm(this.state.errors)) {
+        if (validateForm(this.state.errors)) {
+
+            // this.props.handleLog()
+
             const data = {
                 email: this.state.email,
                 password: this.state.password
             }
 
-            console.log(data)
+            // console.log(data)
 
-            // await axios.post('http://127.0.0.1:8000/api/login', data)
-            //     .then(response => {
-            //         console.log(response);
-            //         let result = response.data
-            //         this.props.setBearToken(result.token, result.user)
-            //         this.props.handleLogging()
+            await axios.post('http://127.0.0.1:8000/api/login', data)
+                .then(response => {
+                    if(response.data.token){
+                    let result = response.data
+                    this.props.setBearToken(result.token, result.user)
+                    this.props.handleLog()
+                    // console.log(response.data);
 
-            //         window.localStorage.setItem('token', JSON.stringify(result.token))
-            //         // window.localStorage.setItem('user', JSON.stringify(result.user))
-            //         window.localStorage.setItem('isLoggedIn', JSON.stringify(true))
-            //         // return response.data
-            //         this.props.history.push('/')
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     })
+                    window.localStorage.setItem('token', JSON.stringify(result.token))
+                    window.localStorage.setItem('user', JSON.stringify(result.user))
+                    window.localStorage.setItem('isLoggedIn', JSON.stringify(true))
+                    // return response.data
+                    this.props.history.push('/')
+                    console.log('logged in succesfully')
+                    }
+                    else{
+                        alert('incorrect password')
+                    }
+                })
+                .catch(function (error) {
+                    
+                    if(error.response.status === 422){
+                        alert('email was not found')
+                    }
+                    else if(error.response.status === 401){
+                        alert('incorrect password')
+                    }
+                    else{
+                        console.log(error);
+                    }
+                })
 
-
-
-          }else{
-            console.error('Invalid Form')
-          }
+        } 
+        
+        else {
+            // console.error('Invalid Form')
+            window.alert('Form was entered incorrectly, please try again')
+        }
 
         // console.log(result)
 
@@ -157,37 +176,45 @@ class Login extends React.Component {
     }
 
     render() {
-        // const n = String.fromCharCode(64)
-        // console.log(n)
-        const {errors} = this.state
+        const { errors } = this.state
         return (
             <LoginStyle style={{ backgroundImage: `url(${Tower})` }}>
                 <div >
                     <div className='contained'>
+                        {this.props.isLoggedIn 
+                            ? 
+                            <h1>You are LoggedIn</h1>
+                            // this.props.screenWidth  
+                            // :this.props.screenWidth < 1000
+                            // ?
+                            // <h1>Please Login from a Laptop or Desktop</h1>
+                            :
+                            <div>
+                                <h1>Login</h1>
 
-                        <h1>Login</h1>
+                                <form onSubmit={this.handleSubmit} className='mt-3' noValidate>
 
-                        <form onSubmit={this.handleSubmit} className='mt-3' noValidate>
+                                    <div className="email form-group">
+                                        <label htmlFor='email'>Email address</label>
+                                        <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate />
+                                        {errors.email.length > 0 &&
+                                            <span className='error text-danger'>{errors.email}</span>
+                                        }
+                                    </div>
 
-                            <div className="email form-group">
-                                <label htmlFor='email'>Email address</label>
-                                <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate/>
-                                {errors.email.length > 0 &&
-                                    <span className='error'>{errors.email}</span>
-                                }
+                                    <div className="password form-group">
+                                        <label>Password</label>
+                                        <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate />
+                                        {errors.password.length > 0 &&
+                                            <span className='error text-danger'>{errors.password}</span>
+                                        }
+                                    </div>
+
+                                    <input className='btn btn-lg' type="submit" value="Login" />
+
+                                </form>
                             </div>
-
-                            <div className="password form-group">
-                                <label>Password</label>
-                                <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate/>
-                                {errors.password.length > 0 &&
-                                    <span className='error'>{errors.password}</span>
-                                }
-                            </div>
-
-                            <input className='btn btn-lg' type="submit" value="Login" />
-
-                        </form>
+                        }
                     </div>
                 </div>
             </LoginStyle>

@@ -46,7 +46,15 @@ const TopMenuStyle = styled.div`
         font-size: 17px;
     }
 
-    #login:hover{
+    #logout {
+        margin-left: 13px;
+        height: 2.3rem;
+        background-color: red;
+        color: white;
+        font-size: 17px;
+    }
+
+    #login:hover, #logout:hover{
         border: none;
         font-weight: bold;
         opacity: .8;
@@ -88,10 +96,17 @@ const TopMenuStyle = styled.div`
 
         #login {
         margin-top: 13px;
-        width: 50px;
+        width: 65px;
+        height: 2rem;
+        padding: 4.5px;
+        }
+    
+
+        #logout {
+        margin-top: 13px;
         height: 2rem;
         padding: 5.5px;
-        background-color: blue;
+        background-color: red;
         color: white;
         }
     }
@@ -212,11 +227,19 @@ class TopMenu extends React.Component {
                         </li>
                     </a>
 
-                    <a href='https://www.workerservices.net/login'>
-                        <li className='btn btn-lg' id='login'>
-                            Login
+                    {/* checks to see if user is logged in and show login button or logout button */}
+                    {this.props.isLoggedIn
+                    ?  
+                        <li className='btn btn-lg' onClick={this.props.handleLog} id='logout'>
+                            Logout
                         </li>
-                    </a>
+                    :
+                        <a href='https://www.workerservices.net/login'>
+                            <li className='btn btn-lg' id='login'>
+                                Login
+                            </li>
+                        </a>
+                    }
                 </ul>
             </TopMenuStyle>
         );

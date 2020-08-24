@@ -9,8 +9,8 @@ const Container = styled.span`
 function HomeBody() {
     return (
             <Container>
-                <div className='fiverow mb-5'>
-                    <div className='topscript mt-5'>
+                <div className='fiverow'>
+                    <div className='topscript'>
                         <div className='col-12'>
                             <p>
                             The need to communicate with employees, team members, customers, associates, 
@@ -20,10 +20,10 @@ function HomeBody() {
                             </p>
                         </div>
                     </div>
-                    <div className='grid row text-center mt-5'>
+                    <div className='grid row text-center'>
                         <div className='column col-lg-2 p-0 mx-1'>
                             <p><strong>Government</strong></p>
-                            <p className='pt-3 pb-5'>
+                            <p className='subbodyheader'>
                                 Proactive documentation and communication is key to contract success, and in satisfying the Contracting Officer.
                             </p>
                             <Link to='/industries/government' className='btn'>
@@ -32,7 +32,7 @@ function HomeBody() {
                         </div>
                         <div className='column col-lg-2 p-0 mx-1'>
                             <p><strong>Construction</strong></p>
-                            <p className='pt-3 pb-5'>
+                            <p className='subbodyheader'>
                                 When work is done on a job site or factory floor, not on a computer screen.
                             </p>
                             <Link to='/industries/construction' className='btn'>
@@ -41,7 +41,7 @@ function HomeBody() {
                         </div>
                         <div className='column col-lg-2 p-0 mx-1'>
                             <p><strong>Manufacturing</strong></p>
-                            <p className='pt-3 pb-5'>
+                            <p className='subbodyheader'>
                                 People pay for the goods being built, not the paper being pushed. 
                             </p>
                             <Link to='/industries/manufacturing' className='btn'>
@@ -50,7 +50,7 @@ function HomeBody() {
                         </div>
                         <div className=' column col-lg-2 p-0 mx-1'>
                             <p><strong>Associations</strong></p>
-                            <p className='pt-3 pb-5'>
+                            <p className='subbodyheader'>
                                 Association membership tools should be intuitive, beneficial, and efficient..
                             </p>
                             <Link to='/industries/associations' className='btn'>
@@ -59,7 +59,7 @@ function HomeBody() {
                         </div>
                         <div className='column col-lg-2 p-0 mx-1'>
                             <p><strong>Others</strong></p>
-                            <p className='pt-3 pb-5'>
+                            <p className='subbodyheader'>
                                 Organizations of various shape, size, and purpose benefit from WS.
                             </p>
                             <Link to='/industries/others' className='btn'>
