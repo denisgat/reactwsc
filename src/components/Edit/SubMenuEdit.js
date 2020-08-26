@@ -1,15 +1,19 @@
        
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import axios from 'axios'
+
+const Styling = styled.div`
+    /* min-height: 100%; */
+    background-color: #f0f0f5;
+`;
 
 class Edit extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            header: '',
-            body: '',
             token: '',
             submenuheader: '',
             submenubody: ''
@@ -66,18 +70,12 @@ class Edit extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
 
+        const data = {
+            submenuheader: this.state.title,
+            submenubody: this.state.body,
+        }
 
-        // console.log(this.state)
-
-
-        // const data = {
-        //     title: this.state.title,
-        //     body: this.state.body,
-        //     user_id: this.props.user.id,
-        //     subreddit_id: this.state.subreddit.id,
-        //     img: this.state.img
-        // }
-        // console.log(data)
+        console.log(data)
 
         // const config = {
         //     headers: {
@@ -110,7 +108,7 @@ class Edit extends React.Component {
         // console.log(this.props)
 
             return (
-                <div className='' style={{ height: '100vh', backgroundColor: '#f0f0f5' }}>
+                <Styling className=''>
                     <div className='container px-5' >
                         <h1 className='text-center pt-5'>Editing</h1>
                         <form onSubmit={this.handleSubmit} className='mt-5'>
@@ -126,7 +124,7 @@ class Edit extends React.Component {
                             <input className='btn btn-lg btn-primary' type="submit" value="Save" />
                         </form>
                     </div>
-                </div>
+                </Styling>
             )
         
 

@@ -72,6 +72,7 @@ class App extends React.Component {
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.handleLog = this.handleLog.bind(this);
         this.setBearToken = this.setBearToken.bind(this);
+        this.setMenu = this.setMenu.bind(this);
     }
 
     async componentDidMount() {
@@ -168,6 +169,12 @@ class App extends React.Component {
         })
     }
 
+    setMenu(newmenu){
+        this.setState({
+            menus: newmenu
+        })
+    }
+
 
     render() {
         if(this.state.menus.length > 0){
@@ -194,8 +201,13 @@ class App extends React.Component {
                                 menus = {this.state.menus}
                             />
                         </Route>
+
                         <Route exact path='/home/menuedit/:id'>
-                            <MenuEdit menus = {this.state.menus}/>
+                            <MenuEdit 
+                                menus = {this.state.menus} 
+                                token = {this.state.token}
+                                setMenu = {this.setMenu}
+                            />
                         </Route>
 
 
@@ -253,10 +265,18 @@ class App extends React.Component {
                         </Route>
 
                         <Route exact path='/application/menuedit/:id'>
-                            <MenuEdit menus = {this.state.menus}/>
+                            <MenuEdit 
+                                menus = {this.state.menus} 
+                                token = {this.state.token}
+                                setMenu = {this.setMenu}
+                            />
                         </Route>
                         <Route exact path='/application/submenuedit/:id'>
-                            <SubMenuEdit menus = {this.state.menus}/>
+                            <MenuEdit 
+                                menus = {this.state.menus} 
+                                token = {this.state.token}
+                                setMenu = {this.setMenu}
+                            />
                         </Route>
 
 
@@ -299,10 +319,18 @@ class App extends React.Component {
                         </Route>
 
                         <Route exact path='/industries/menuedit/:id'>
-                            <MenuEdit menus = {this.state.menus}/>
+                            <MenuEdit 
+                                    menus = {this.state.menus} 
+                                    token = {this.state.token}
+                                    setMenu = {this.setMenu}
+                                />
                         </Route>
                         <Route exact path='/industries/submenuedit/:id'>
-                            <SubMenuEdit menus = {this.state.menus}/>
+                            <SubMenuEdit 
+                                    menus = {this.state.menus} 
+                                    token = {this.state.token}
+                                    setMenu = {this.setMenu}
+                                />
                         </Route>
 
 
@@ -344,10 +372,18 @@ class App extends React.Component {
                         </Route>
 
                         <Route exact path='/resources/menuedit/:id'>
-                            <MenuEdit menus = {this.state.menus}/>
+                            <MenuEdit 
+                                    menus = {this.state.menus} 
+                                    token = {this.state.token}
+                                    setMenu = {this.setMenu}
+                                />
                         </Route>
                         <Route exact path='/resources/submenuedit/:id'>
-                            <SubMenuEdit menus = {this.state.menus}/>
+                            <SubMenuEdit 
+                                    menus = {this.state.menus} 
+                                    token = {this.state.token}
+                                    setMenu = {this.setMenu}
+                                />
                         </Route>
                     </Switch>
                     <Footer />

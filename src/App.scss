@@ -1,4 +1,7 @@
 html, body{
+    min-height: 100vh;
+    margin-bottom: 70px;
+    clear: both;
     font-family: Verdana, sans-serif;
     font-size: 18px;
     overflow-x: hidden;
@@ -224,6 +227,11 @@ html, body{
     ul{
         padding-left: 5rem;
     }
+
+    @media screen and (min-width: 0px) and (max-width: 768px){
+        font-size: medium;
+    }
+
 }
 
 //for subnavigation bar 

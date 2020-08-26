@@ -1,17 +1,24 @@
-       
+
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components'
 import axios from 'axios'
+
+const Styling = styled.div`
+    min-height: 100vh;
+    background-color: #f0f0f5;
+`;
+
 
 class Edit extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            header: '',
-            body: '',
             token: '',
-            menuArray: [],
+            menuId: '',
+            menuheader: '',
+            menubody: ''
 
         }
 
@@ -20,29 +27,30 @@ class Edit extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount(){
-        const menuName= window.location.pathname.split('/')[1]
+    async componentDidMount() {
+        // const menuName= window.location.pathname.split('/')[1]
         // const console.log(window.location.pathname.split('/')[2])
         const menuId = parseInt(window.location.pathname.split('/')[3])
-        const newmenuArray = this.props.menus.filter(item => item.id === menuId) 
+        const newmenuArray = this.props.menus.filter(item => item.id === menuId)[0]
 
-        this.setState({
-            menuArray: newmenuArray
+        await this.setState({
+            menuId: newmenuArray.id,
+            menuheader: newmenuArray.header,
+            menubody: newmenuArray.body
         })
-        // console.log(this.state.menuArray)
     }
 
 
     handleHeader(event) {
         this.setState({
-            header: event.target.value,
+            menuheader: event.target.value,
         })
     }
 
 
     handleBody(event) {
         this.setState({
-            body: event.target.value,
+            menubody: event.target.value,
         })
     }
 
@@ -52,36 +60,29 @@ class Edit extends React.Component {
         event.preventDefault();
 
 
-        // console.log(this.state)
+        const data = {
+            menuheader: this.state.menuheader,
+            menubody: this.state.menubody,
+        }
 
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                'Authorization': 'Bearer ' + this.props.token
+            }
+        }
 
-        // const data = {
-        //     title: this.state.title,
-        //     body: this.state.body,
-        //     user_id: this.props.user.id,
-        //     subreddit_id: this.state.subreddit.id,
-        //     img: this.state.img
-        // }
-        // console.log(data)
+        // console.log(data, config, this.state.menuId)
 
-        // const config = {
-        //     headers: {
-        //         'content-type': 'multipart/form-data',
-        //         'Authorization': 'Bearer ' + this.props.token
-        //     }
-        // }
-
-
-        // await axios.put('http://127.0.0.1:8000/api/post/create', data, config)
-        //     .then(response => {
-        //         // console.log(response.data.data);
-        //         // return response.data
-        //         this.props.setPosts(response.data.data);
-        //         this.props.history.push('/' + this.state.menus.name)
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     })
+        await axios.put('http://127.0.0.1:8000/api/menu/update/' + this.state.menuId, data, config)
+            .then(response => {
+                // console.log(response.data.data);
+                this.props.setMenu(response.data.data);
+                this.props.history.push('/')
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
 
         // console.log(result)
 
@@ -94,27 +95,25 @@ class Edit extends React.Component {
     render() {
         // console.log(this.props)
 
-            return (
-                <div className='' style={{ height: '100vh', backgroundColor: '#f0f0f5' }}>
-                    <div className='container px-5' >
-                        <h1 className='text-center pt-5'>Editing</h1>
-                        <form onSubmit={this.handleSubmit} className='mt-5'>
-                            <div className="form-group">
-                                <label>Header</label>
-                                <input onChange={this.handleHeader} value={this.state.header} type="text" className="form-control" id="exampleInputSubname" aria-describedby="emailHelp1" placeholder="Header" required/>
-                            </div>
-                            <div className="form-group">
-                                <label>Body</label>
-                                <textarea rows='8' onChange={this.handleBody} value={this.state.body} type="text" className="form-control" id="exampleInputDesc" aria-describedby="emailHelp2" placeholder="Body" required/>
-                            </div>
-                            <br></br>
-                            <input className='btn btn-lg btn-primary' type="submit" value="Save" />
-                        </form>
-                    </div>
+        return (
+            <Styling className=''>
+                <div className='container px-5' >
+                    <h1 className='text-center pt-5'>Editing</h1>
+                    <form onSubmit={this.handleSubmit} className='mt-5'>
+                        <div className="form-group">
+                            <label>Header</label>
+                            <input onChange={this.handleHeader} value={this.state.menuheader} type="text" className="form-control" id="exampleInputSubname" aria-describedby="emailHelp1" placeholder="Header" required />
+                        </div>
+                        <div className="form-group">
+                            <label>Body</label>
+                            <textarea rows='8' onChange={this.handleBody} value={this.state.menubody} type="text" className="form-control" id="exampleInputDesc" aria-describedby="emailHelp2" placeholder="Enter Body Text" required />
+                        </div>
+                        <br></br>
+                        <input className='btn btn-lg btn-primary' type="submit" value="Save" />
+                    </form>
                 </div>
-            )
-        
-
+            </Styling>
+        )
     }
 }
 
