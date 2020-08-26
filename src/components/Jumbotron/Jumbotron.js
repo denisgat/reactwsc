@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Jumbo = styled.div`
 
@@ -49,7 +50,7 @@ const Jumbotron = (props) => {
                         <h1>{props.jumboName}</h1>
                         {props.isLoggedIn
                         ?
-                        <div className='modifiedbtn modifiedscript edit'>Edit</div>
+                        <Link to={'/' + props.pageName + '/menuedit/' + props.pageId} className='modifiedbtn modifiedscript edit ml-2'>Edit</Link>
                         :
                         ''
                         }

@@ -6,15 +6,16 @@ import styled from 'styled-components';
 const DisplacedStyling = styled.div`
 `;
 
-const DisplacedEmployees = () => {
+const DisplacedEmployees = (props) => {
     return (
         <DisplacedStyling >
             <div className='subpage container'>
                 <p>
-                Service Contract Act (SCA/SCLS) employees are unique, in that when a contractor gets a new SCA/SCLS job, the contract often brings with it an inherited set of new employees. For the inherited worker, life may not initially change much: on Friday worked for Company A, on Monday working for Company B. The only noticeable difference may be the name of who signs the paycheck.
+                {props.menus[1].submenu[1].body}
+                {/* Service Contract Act (SCA/SCLS) employees are unique, in that when a contractor gets a new SCA/SCLS job, the contract often brings with it an inherited set of new employees. For the inherited worker, life may not initially change much: on Friday worked for Company A, on Monday working for Company B. The only noticeable difference may be the name of who signs the paycheck. */}
                 </p>
 
-                <p>
+                {/* <p>
                 How does the contractor truly make these inherited workers part of their company? How does the worker know what is expected by their new employer? And how does the contractor show to the Contracting Officer their ducks are in a row?
                 </p>
 
@@ -34,7 +35,7 @@ const DisplacedEmployees = () => {
                 </ul>
 
                 <p>WorkerServices is a communication tool that spans distances when face to face just isn’t possible. 
-                </p>
+                </p> */}
             </div>
         </DisplacedStyling >
 

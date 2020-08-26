@@ -1,75 +1,181 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Container = styled.span`
 `;
 
 
-function HomeBody() {
+function IndustriesBody(props) {
+
     return (
-            <Container>
-                <div className='fiverow'>
-                    <div className='topscript'>
-                        <div className='col-12'>
-                            <p>
-                            The need to communicate with employees, team members, customers, associates, 
-                            or volunteers spans across industry and sector. The specific forms, documents, 
-                            and files may differ, but the need to make these items available in an efficient 
-                            and secure way is the same.
-                            </p>
-                        </div>
+        <Container>
+            <div className='fiverow'>
+                <div className='topscript'>
+                    <div className='col-12'>
+                        <p>
+                            {props.menus[2].body}
+                        </p>
+                        {props.isLoggedIn
+                            ?
+
+                            <Link to={'/industries/menuedit/' + props.menus[2].id} className='modifiedscript modifiedbtn edit'>Edit</Link>
+                            :
+                            ''
+                        }
                     </div>
-                    <div className='grid row text-center'>
-                        <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Government</strong></p>
+                </div>
+
+                <div className='grid row text-center'>
+                       <div className='column col-lg-2 p-0 mx-1'>
+                            <p><strong>{props.menus[2].submenu[0].name}</strong></p>
                             <p className='subbodyheader'>
-                                Proactive documentation and communication is key to contract success, and in satisfying the Contracting Officer.
+                                {props.menus[2].submenu[0].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/government'} className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/submenuedit/'  + props.menus[2].submenu[0].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/industries/government' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Construction</strong></p>
+                            <p><strong>{props.menus[2].submenu[1].name}</strong></p>
                             <p className='subbodyheader'>
-                                When work is done on a job site or factory floor, not on a computer screen.
+                                {props.menus[2].submenu[1].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/construction'} className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/submenuedit/'  + props.menus[2].submenu[1].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/industries/construction' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Manufacturing</strong></p>
+                            <p><strong>{props.menus[2].submenu[2].name}</strong></p>
                             <p className='subbodyheader'>
-                                People pay for the goods being built, not the paper being pushed. 
+                                {props.menus[2].submenu[2].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/manufacturing'} className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/submenuedit/'  + props.menus[2].submenu[2].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/industries/manufacturing' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
-                        <div className=' column col-lg-2 p-0 mx-1'>
-                            <p><strong>Associations</strong></p>
+
+                        <div className='column col-lg-2 p-0 mx-1'>
+                            <p><strong>{props.menus[2].submenu[3].name}</strong></p>
                             <p className='subbodyheader'>
-                                Association membership tools should be intuitive, beneficial, and efficient..
+                                {props.menus[2].submenu[3].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/associations'} className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/submenuedit/'  + props.menus[2].submenu[3].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/industries/associations' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Others</strong></p>
+                            <p><strong>{props.menus[2].submenu[4].name}</strong></p>
                             <p className='subbodyheader'>
-                                Organizations of various shape, size, and purpose benefit from WS.
+                                {props.menus[2].submenu[4].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/others'} className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/industries/submenuedit/'  + props.menus[2].submenu[4].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/industries/others' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
-                    </div>
+
                 </div>
-            </Container>
+            </div>
+        </Container>
     );
 }
 
-export default HomeBody;
+export default IndustriesBody;

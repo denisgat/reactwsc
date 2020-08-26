@@ -5,15 +5,16 @@ import styled from 'styled-components';
 const DisplacedStyling = styled.div`
 `;
 
-const DisplacedEmployees = () => {
+const DisplacedEmployees = (props) => {
     return (
         <DisplacedStyling >
             <div className='subpage container'>
                 <p>
-                If a form can be filled out with a pen, it can be converted to a fillable form and posted to WorkerServices. If assistance is needed with this, contact us to have us convert, create, and post the form for you.
+                    {props.menus[1].submenu[3].body}
+                {/* If a form can be filled out with a pen, it can be converted to a fillable form and posted to WorkerServices. If assistance is needed with this, contact us to have us convert, create, and post the form for you. */}
                 </p>
 
-                <p>
+                {/* <p>
                 Some of the forms that have been created for use on WorkerServices include:
                 </p>
 
@@ -34,7 +35,7 @@ const DisplacedEmployees = () => {
                 </ul>
 
                 <p>WorkerServices is a communication tool that spans distances when face to face just isn’t possible. 
-                </p>
+                </p> */}
             </div>
         </DisplacedStyling >
 

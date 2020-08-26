@@ -7,66 +7,172 @@ const Container = styled.span`
 `;
 
 
-function HomeBody() {
+function ResourcesBody(props) {
     return (
             <Container>
                 <div className='fiverow'>
                     <div className='topscript'>
                         <div className='col-12'>
                             <p>
+                                {props.menus[3].body}
                             </p>
+                            {props.isLoggedIn
+                            ?
+
+                            <Link to={'/resources/menuedit/' + props.menus[3].id} className='modifiedscript modifiedbtn edit'>Edit</Link>
+                            :
+                            ''
+                            }
                         </div>
                     </div>
+
                     <div className='grid row text-center'>
                         <div className=' column col-lg-2 p-0 mx-1'>
-                            <p><strong>Our Principles</strong></p>
+                            <p><strong>{props.menus[3].submenu[0].name}</strong></p>
                             <p className='subbodyheader'>
-                                The best way to fix a problem is don’t have it.
+                                {props.menus[3].submenu[0].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to='/resources/our-principles' className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/resources/submenuedit/' + props.menus[3].submenu[0].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/resources/our-principles' className='btn'>
-                                Learn More
+                            Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>AR/WS/W401k</strong></p>
+                            <p><strong>{props.menus[3].submenu[1].name}</strong></p>
                             <p className='subbodyheader'>
-                                One company, three service offerings.
+                                {props.menus[3].submenu[1].header}
                             </p>
+
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to='/resources/ar-w401k' className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/resources/submenuedit/' + props.menus[3].submenu[1].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/resources/ar-w401k' className='btn'>
-                                Learn More
+                            Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>News & Events</strong></p>
+                            <p><strong>{props.menus[3].submenu[2].name}</strong></p>
                             <p className='subbodyheader'>
-                                News, Articles, Tips and Events by Advantage Resource
+                                {props.menus[3].submenu[2].header}
                             </p>
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to='/resources/news'className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/resources/submenuedit/' + props.menus[3].submenu[2].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/resources/news' className='btn'>
-                                Learn More
+                            Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>FAQ</strong></p>
+                            <p><strong>{props.menus[3].submenu[3].name}</strong></p>
                             <p className='subbodyheader'>
-                                Answers to some WS questions asked more than once.
+                                {props.menus[3].submenu[3].header}
                             </p>
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to='/resources/faq' className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/resources/submenuedit/' + props.menus[3].submenu[3].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/resources/faq' className='btn'>
-                                Learn More
+                            Learn More
                             </Link>
+                            }
                         </div>
+
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Contact Us</strong></p>
+                            <p><strong>{props.menus[3].submenu[4].name}</strong></p>
                             <p className='subbodyheader'>
-                                How to get in touch with someone to talk about WorkerServices.
+                                {props.menus[3].submenu[4].header}
                             </p>
+                            {props.isLoggedIn
+                            ?
+                            <div className='modified container'>
+                                <div className='row'>
+                                    <div className='col-6'>
+                                        <Link to='/resources/contact-us' className='modifiedbtn more'>
+                                            More
+                                        </Link>
+                                    </div>
+                                    <div className='col-6'>
+                                        <Link to={'/resources/submenuedit/' + props.menus[3].submenu[4].id} className='modifiedbtn edit'>
+                                            Edit
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            :
                             <Link to='/resources/contact-us' className='btn'>
                                 Learn More
                             </Link>
+                            }
                         </div>
+
                     </div>
                 </div>
             </Container>
     );
 }
 
-export default HomeBody;
+export default ResourcesBody;

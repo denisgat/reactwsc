@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import Tower from '../components/img/pics/industries.jpg';
 
@@ -169,10 +169,6 @@ class Login extends React.Component {
             window.alert('Form was entered incorrectly, please try again')
         }
 
-        // console.log(result)
-
-        // console.log(this.state)
-
     }
 
     render() {
@@ -183,11 +179,10 @@ class Login extends React.Component {
                     <div className='contained'>
                         {this.props.isLoggedIn 
                             ? 
-                            <h1>You are LoggedIn</h1>
-                            // this.props.screenWidth  
-                            // :this.props.screenWidth < 1000
-                            // ?
-                            // <h1>Please Login from a Laptop or Desktop</h1>
+                            <div>
+                                <h1>You are LoggedIn</h1>
+                                <Link onClick={this.props.handleLog} to='/'  className='my-5 btn btn-lg btn-danger'>Logout</Link>
+                            </div>
                             :
                             <div>
                                 <h1>Login</h1>
@@ -196,7 +191,7 @@ class Login extends React.Component {
 
                                     <div className="email form-group">
                                         <label htmlFor='email'>Email address</label>
-                                        <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate />
+                                        <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate/>
                                         {errors.email.length > 0 &&
                                             <span className='error text-danger'>{errors.email}</span>
                                         }
@@ -204,7 +199,7 @@ class Login extends React.Component {
 
                                     <div className="password form-group">
                                         <label>Password</label>
-                                        <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate />
+                                        <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate/>
                                         {errors.password.length > 0 &&
                                             <span className='error text-danger'>{errors.password}</span>
                                         }

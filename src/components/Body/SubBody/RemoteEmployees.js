@@ -1,21 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const RemoteStyling = styled.div`
+const Styling = styled.div`
 `;
 
-const RemoteEmployees = () => {
+const RemoteEmployees = (props) => {
     return (
-        <RemoteStyling >
+        <Styling >
             <div className='subpage container'>
                 <p>
-                    For a company with a decentralized work force, providing required notices and 
+                    {props.menus[1].submenu[0].body}
+                    {/* For a company with a decentralized work force, providing required notices and 
                     documents to employees can be challenging. Receiving paperwork from these same remote employees, 
                     securely and filled out completely, can be equally challenging. WorkerServices provides a secure 
-                    means to post items for employee use and reference, along with the ability for employees to upload documents back to the home office.
+                    means to post items for employee use and reference, along with the ability for employees to upload documents back to the home office. */}
                 </p>
 
-                <p>
+                {/* <p>
                     What types of files can be securely transmitted and stored?
                 </p>
 
@@ -36,9 +37,9 @@ const RemoteEmployees = () => {
                 <p>Sometimes it is the tasks that should be easiest (getting a timecard submitted on time, receiving an insurance beneficiary form, 
                     finding a copy of an employee’s most recent OSHA training)
                 that take the most time. Fundamentally, WorkerServices is a tool that, with proper use, greatly simplifies the task at hand.
-                </p>
+                </p> */}
             </div>
-        </RemoteStyling >
+        </Styling >
 
     );
 };

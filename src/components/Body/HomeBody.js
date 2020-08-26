@@ -8,22 +8,20 @@ const Container = styled.span`
 
 
 function HomeBody(props) {
+    // console.log(props.menus)
     return (
             <Container>
+
                 <div className='fiverow mb-5'>
                     <div className='topscript'>
                         <div className='col-12'>
                             <p>
-                                WorkerServices provides a secure online platform for the access of files and forms
-                                between a company and its employees, an organization and its members, or an association
-                                and its affiliates. Documents and forms related to policies, processes, procedures, safety
-                                and OSHA programs, employee benefits forms and notices, training videos, SDS sheets,
-                                employment applications and more can all be stored on WorkerServices.
+                                {props.menus[0].body}
                             </p>
                             {props.isLoggedIn
                             ?
 
-                            <div className='modifiedscript modifiedbtn edit'>Edit</div>
+                            <Link to={'/home/menuedit/' + props.menus[0].id} className='modifiedscript modifiedbtn edit'>Edit</Link>
                             :
                             ''
                             }
@@ -31,9 +29,9 @@ function HomeBody(props) {
                     </div>
                     <div className='grid row text-center'>
                         <div className='column col-lg-2 mx-1'>
-                            <p><strong>Remote Employees</strong></p>
+                            <p><strong>{props.menus[1].submenu[0].name}</strong></p>
                             <p className='subbodyheader'>
-                                The workforce is spread out and mobile, but the company office is not.
+                                {props.menus[1].submenu[0].header}
                             </p>
                             {props.isLoggedIn
                             ?
@@ -45,7 +43,7 @@ function HomeBody(props) {
                                         </Link>
                                     </div>
                                     <div className='col-6'>
-                                        <Link to='/application/remote-employees' className='modifiedbtn edit'>
+                                        <Link to={'/application/submenuedit/' + props.menus[1].submenu[0].id} className='modifiedbtn edit'>
                                             Edit
                                         </Link>
                                     </div>
@@ -60,9 +58,9 @@ function HomeBody(props) {
                         </div>
 
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Displaced Workers</strong></p>
+                            <p><strong>{props.menus[1].submenu[1].name}</strong></p>
                             <p className='subbodyheader'>
-                                Inherited Service Contract Act (SCA/SCLS) employees work for you now
+                                {props.menus[1].submenu[2].header}
                             </p>
                             {props.isLoggedIn
                             ?
@@ -74,7 +72,7 @@ function HomeBody(props) {
                                         </Link>
                                     </div>
                                     <div className='col-6'>
-                                        <Link to='/application/displaced-workers' className='modifiedbtn edit'>
+                                        <Link to={'/application/submenuedit/' + props.menus[1].submenu[1].id} className='modifiedbtn edit'>
                                             Edit
                                         </Link>
                                     </div>
@@ -88,9 +86,9 @@ function HomeBody(props) {
                         </div>
 
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Construction</strong></p>
+                            <p><strong>{props.menus[2].submenu[1].name}</strong></p>
                             <p className='subbodyheader'>
-                                When work is done at a job site, not on a computer screen.
+                                {props.menus[2].submenu[1].header}
                             </p>
                             {props.isLoggedIn
                             ?
@@ -102,7 +100,7 @@ function HomeBody(props) {
                                         </Link>
                                     </div>
                                     <div className='col-6'>
-                                        <Link to='/industries/construction' className='modifiedbtn edit'>
+                                        <Link to={'/industries/submenuedit/' + props.menus[2].submenu[1].id} className='modifiedbtn edit'>
                                             Edit
                                         </Link>
                                     </div>
@@ -116,9 +114,9 @@ function HomeBody(props) {
                         </div>
 
                         <div className=' column col-lg-2 p-0 mx-1'>
-                            <p><strong>Manufacturing</strong></p>
+                            <p><strong>{props.menus[2].submenu[2].name}</strong></p>
                             <p className='subbodyheader'>
-                                People pay for the goods being built, not the paper being pushed.
+                                {props.menus[2].submenu[2].header}
                             </p>
                             {props.isLoggedIn
                             ?
@@ -130,7 +128,7 @@ function HomeBody(props) {
                                         </Link>
                                     </div>
                                     <div className='col-6'>
-                                        <Link to='/industries/manufacturing' className='modifiedbtn edit'>
+                                        <Link to={'/industries/submenuedit/' + props.menus[2].submenu[2].id} className='modifiedbtn edit'>
                                             Edit
                                         </Link>
                                     </div>
@@ -144,9 +142,9 @@ function HomeBody(props) {
                         </div>
 
                         <div className='column col-lg-2 p-0 mx-1'>
-                            <p><strong>Others</strong></p>
+                            <p><strong>{props.menus[2].submenu[4].name}</strong></p>
                             <p className='subbodyheader'>
-                                Organizations of various shape, size, and purpose benefit from WS.
+                                {props.menus[2].submenu[4].header}
                             </p>
                             {props.isLoggedIn
                             ?
@@ -158,7 +156,7 @@ function HomeBody(props) {
                                         </Link>
                                     </div>
                                     <div className='col-6'>
-                                        <Link to='/industries/others' className='modifiedbtn edit'>
+                                        <Link to={'/industries/submenuedit/' + props.menus[2].submenu[4].id} className='modifiedbtn edit'>
                                             Edit
                                         </Link>
                                     </div>
@@ -171,7 +169,7 @@ function HomeBody(props) {
                             }
                         </div>
                     </div>
-                </div>
+                </div>           
             </Container>
     );
 }

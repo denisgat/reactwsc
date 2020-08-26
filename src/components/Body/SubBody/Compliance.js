@@ -5,15 +5,16 @@ import styled from 'styled-components';
 const DisplacedStyling = styled.div`
 `;
 
-const DisplacedEmployees = () => {
+const DisplacedEmployees = (props) => {
     return (
         <DisplacedStyling >
             <div className='subpage container'>
                 <p>
-                There are regulatory agencies, federal, state, and local authorities, and contractual requirements. Compliance is only easy if you don’t care how much money you spend.  
+                    {props.menus[1].submenu[2].body}
+                {/* There are regulatory agencies, federal, state, and local authorities, and contractual requirements. Compliance is only easy if you don’t care how much money you spend.   */}
                 </p>
 
-                <p>
+                {/* <p>
                 WorkerServices is designed to be an “aggravation reducer”, an administrative tool to help stay on the right side of compliance. Some of the items that have been posted for easy access on WorkerServices include:
                 </p>
 
@@ -27,7 +28,7 @@ const DisplacedEmployees = () => {
 
                 <p>
                 Ready access to policies and procedures can help companies avoid costly fines and penalties. The flexibility of WorkerServices allows each company to use the tool as it best sees fit.  
-                </p>
+                </p> */}
             </div>
         </DisplacedStyling >
 
