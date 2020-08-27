@@ -15,7 +15,7 @@ class Edit extends React.Component {
         super(props)
 
         this.state = {
-            token: '',
+            menuName: '',
             menuId: '',
             menuheader: '',
             menubody: ''
@@ -34,6 +34,7 @@ class Edit extends React.Component {
         const newmenuArray = this.props.menus.filter(item => item.id === menuId)[0]
 
         await this.setState({
+            menuName: newmenuArray.name,
             menuId: newmenuArray.id,
             menuheader: newmenuArray.header,
             menubody: newmenuArray.body
@@ -75,18 +76,22 @@ class Edit extends React.Component {
         // console.log(data, config, this.state.menuId)
 
         await axios.put('http://127.0.0.1:8000/api/menu/update/' + this.state.menuId, data, config)
-            .then(response => {
+            .then(async response => {
                 // console.log(response.data.data);
                 this.props.setMenu(response.data.data);
-                this.props.history.push('/')
+                if(this.state.menuName ===  'Home'){
+                    this.props.history.push(`/`)
+                    alert('successfully updated')
+                }
+                else{
+                    this.props.history.push(`/${this.state.menuName}`)
+                    alert('successfully updated')
+                }
             })
             .catch(function (error) {
                 console.log(error);
             })
 
-        // console.log(result)
-
-        // console.log(this.state)
 
     }
 
@@ -106,7 +111,7 @@ class Edit extends React.Component {
                         </div>
                         <div className="form-group">
                             <label>Body</label>
-                            <textarea rows='8' onChange={this.handleBody} value={this.state.menubody} type="text" className="form-control" id="exampleInputDesc" aria-describedby="emailHelp2" placeholder="Enter Body Text" required />
+                            <textarea rows='8' onChange={this.handleBody} value={this.state.menubody} type="text" className="form-control" id="exampleInputDesc" aria-describedby="emailHelp2" placeholder="Body" />
                         </div>
                         <br></br>
                         <input className='btn btn-lg btn-primary' type="submit" value="Save" />

@@ -60,7 +60,7 @@ function HomeBody(props) {
                         <div className='column col-lg-2 p-0 mx-1'>
                             <p><strong>{props.menus[1].submenu[1].name}</strong></p>
                             <p className='subbodyheader'>
-                                {props.menus[1].submenu[2].header}
+                                {props.menus[1].submenu[1].header}
                             </p>
                             {props.isLoggedIn
                             ?

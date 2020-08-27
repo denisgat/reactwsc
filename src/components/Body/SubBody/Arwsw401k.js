@@ -10,11 +10,11 @@ const Arwsw401k = (props) => {
         <Styling >
             <div className='subpage container'>
                 <p>
-                    {props.menus[2].submenu[4].body}
+                    {props.menus[3].submenu[1].body}
                 </p>
                 {props.isLoggedIn
                     ?
-                    <Link to='/resource/submenuedit/11' className='modifiedbtn modifiedscript edit'>Edit</Link>
+                    <Link to={'/resources/submenuedit/' + props.menus[3].submenu[1].id} className='modifiedbtn modifiedscript edit'>Edit</Link>
                     :
                     ''
                 }

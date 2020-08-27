@@ -272,7 +272,7 @@ class App extends React.Component {
                             />
                         </Route>
                         <Route exact path='/application/submenuedit/:id'>
-                            <MenuEdit 
+                            <SubMenuEdit 
                                 menus = {this.state.menus} 
                                 token = {this.state.token}
                                 setMenu = {this.setMenu}

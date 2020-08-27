@@ -12,9 +12,10 @@ const Associations = (props) => {
                 <p>
                     {props.menus[2].submenu[3].body}
                 </p>
+
                 {props.isLoggedIn
                     ?
-                    <Link to='/industries/submenuedit/8' className='modifiedbtn modifiedscript edit'>Edit</Link>
+                    <Link to={'/industries/submenuedit/' + props.menus[2].submenu[3].id} className='modifiedbtn modifiedscript edit'>Edit</Link>
                     :
                     ''
                 }
