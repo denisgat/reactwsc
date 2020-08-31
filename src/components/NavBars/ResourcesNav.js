@@ -5,32 +5,32 @@ import {Link} from 'react-router-dom';
 const BottomNavStyling = styled.nav`
 `;
 
-const BottomNav = () => {
+const BottomNav = (props) => {
     return (
         <BottomNavStyling>
             <ul className='subnav'>
                 <li>
-                    <Link to='/resources/our-principles'>
+                    <Link className={props.secondPathName === 'our-principles' ? 'active' : ''} to='/resources/our-principles'>
                         Our Principles
                     </Link>
                 </li>
                 <li>
-                    <Link to='/resources/ar-w401k'>
+                    <Link className={props.secondPathName === 'ar-w401k' ? 'active' : ''} to='/resources/ar-w401k'>
                         AR, WS, and W401k
                     </Link>
                 </li>
                 <li>
-                    <Link to='/resources/news'>
+                    <Link className={props.secondPathName === 'news' ? 'active' : ''} to='/resources/news'>
                         News & Events
                     </Link>
                 </li>
                 <li>
-                    <Link to='/resources/faq'>
+                    <Link className={props.secondPathName === 'faq' ? 'active' : ''} to='/resources/faq'>
                         FAQ
                     </Link> 
                 </li>
                 <li>
-                    <Link to='/resources/contact-us'>
+                    <Link className={props.secondPathName === 'contact-us' ? 'active' : ''} to='/resources/contact-us'>
                         Contact Us
                     </Link> 
                 </li>

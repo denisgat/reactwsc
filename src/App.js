@@ -64,8 +64,8 @@ class App extends React.Component {
         this.state = {
             isLoggedIn: false,
             screenWidth: 0,
-            firstpathName: '',
-            secondpathName: '',
+            firstPathName: '',
+            secondPathName: '',
             token: '',
             user: {},
             menus: [],
@@ -117,8 +117,8 @@ class App extends React.Component {
 
     updatePathName() {
         this.setState({ 
-            firstpathName: window.location.pathname.split('/')[1],
-            secondpathName: window.location.pathname.split('/')[2] 
+            firstPathName: window.location.pathname.split('/')[1],
+            secondPathName: window.location.pathname.split('/')[2] 
         })
     }
 
@@ -257,7 +257,7 @@ class App extends React.Component {
                                 jumboPic={resourcesPic}
                                 jumboName={this.state.menus[1].submenu[0].name}
                             />
-                            <ApplicationNav menus={this.state.menus} />
+                            <ApplicationNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <RemoteEmployees menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/displaced-workers'>
@@ -265,17 +265,17 @@ class App extends React.Component {
                                 jumboPic={displacedworkersPic}
                                 jumboName={this.state.menus[1].submenu[1].name}
                             />
-                            <ApplicationNav menus={this.state.menus} />
+                            <ApplicationNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <DisplacedWorkers menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/compliance'>
                             <Jumbotron jumboPic={compliancePic} jumboName={this.state.menus[1].submenu[2].name} />
-                            <ApplicationNav menus={this.state.menus} />
+                            <ApplicationNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Compliance menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/forms-library'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[1].submenu[3].name} />
-                            <ApplicationNav menus={this.state.menus} />
+                            <ApplicationNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <FormsLibrary menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 
@@ -321,27 +321,27 @@ class App extends React.Component {
                         </Route>
                         <Route path='/industries/government'>
                             <Jumbotron jumboPic={governmentPic} jumboName={this.state.menus[2].submenu[0].name} />
-                            <IndustriesNav menus={this.state.menus} />
+                            <IndustriesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Government menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/construction'>
                             <Jumbotron jumboPic={constructionPic} jumboName={this.state.menus[2].submenu[1].name} />
-                            <IndustriesNav menus={this.state.menus} />
+                            <IndustriesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Construction menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/manufacturing'>
                             <Jumbotron jumboPic={manufacturingPic} jumboName={this.state.menus[2].submenu[2].name} />
-                            <IndustriesNav menus={this.state.menus} />
+                            <IndustriesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Manufacturing menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/associations'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[2].submenu[3].name} />
-                            <IndustriesNav menus={this.state.menus} />
+                            <IndustriesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Associations menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/others'>
                             <Jumbotron jumboPic={othersPic} jumboName={this.state.menus[2].submenu[4].name} />
-                            <IndustriesNav menus={this.state.menus} />
+                            <IndustriesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Others menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 
@@ -386,27 +386,27 @@ class App extends React.Component {
                         </Route>
                         <Route path='/resources/our-principles'>
                             <Jumbotron jumboPic={ourprinciplesPic} jumboName={this.state.menus[3].submenu[0].name} />
-                            <ResourcesNav menus={this.state.menus} />
+                            <ResourcesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Ourprinciples menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/ar-w401k'>
                             <Jumbotron jumboPic={arw401kPic} jumboName={this.state.menus[3].submenu[1].name} />
-                            <ResourcesNav menus={this.state.menus} />
+                            <ResourcesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Arwsw401k menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/news'>
                             <Jumbotron jumboPic={compliancePic} jumboName={this.state.menus[3].submenu[2].name} />
-                            <ResourcesNav menus={this.state.menus} />
+                            <ResourcesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Newsandevents menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/faq'>
                             <Jumbotron jumboPic={arw401kPic} jumboName={this.state.menus[3].submenu[3].name} />
-                            <ResourcesNav menus={this.state.menus} />
+                            <ResourcesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Faq menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/contact-us'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[3].submenu[4].name} />
-                            <ResourcesNav menus={this.state.menus} />
+                            <ResourcesNav secondPathName={this.state.secondPathName} menus={this.state.menus} />
                             <Contactus menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 

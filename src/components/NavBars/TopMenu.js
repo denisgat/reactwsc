@@ -32,10 +32,6 @@ const TopMenuStyle = styled.div`
         border-bottom: 5px solid #336702;
     }
 
-    .active{
-        background-color:#f6f6f6;
-        border-bottom: 5px solid #336702;
-    }
 
     /*Login button properties */
     #login {
@@ -54,6 +50,7 @@ const TopMenuStyle = styled.div`
         font-size: 17px;
     }
 
+
     #login:hover, #logout:hover{
         border: none;
         font-weight: bold;
@@ -71,12 +68,22 @@ const TopMenuStyle = styled.div`
         margin: 5px 0px;
     }
 
+    .dropdown.active{
+        background-color:#f6f6f6;
+        border-bottom: 5px solid #336702;
+    }
+
     .dropdown-item{
         font-size: 17px;
         padding: 15px;
     }
 
     .dropdown-item:hover{
+        background-color: #336702;
+        color: white;
+    }
+
+    .dropdown-item.active {
         background-color: #336702;
         color: white;
     }
@@ -117,100 +124,54 @@ class TopMenu extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            home: true,
-            application: false,
-            industries: false,
-            resources: false
         }
-
-        this.toggleHome = this.toggleHome.bind(this);
-        this.toggleApp = this.toggleApp.bind(this);
-        this.toggleInd = this.toggleInd.bind(this);
-        this.toggleRes = this.toggleRes.bind(this);
-    }
-
-    toggleHome(){
-        this.setState({
-            home: true,
-            application: false,
-            industries: false,
-            resources: false
-        })
-    }
-
-    toggleApp(){
-        this.setState({
-            home: false,
-            application: true,
-            industries: false,
-            resources: false
-        })
-    }
-
-    toggleInd(){
-        this.setState({
-            home: false,
-            application: false,
-            industries: true,
-            resources: false
-        })
-    }
-
-    toggleRes(){
-        this.setState({
-            home: false,
-            application: false,
-            industries: false,
-            resources: true
-        })
     }
 
     render() {
-        // console.log(this.state)
 
         return (
             <TopMenuStyle>
                 <ul>
-                    <li onClick={this.toggleHome} className={this.state.home ? 'active' : ''}>
+                    <li className={this.props.firstPathName === 'home' || this.props.firstPathName === '' || this.props.firstPathName === '/' ? 'dropdown active' : 'dropdown'}>
                         <Link to='/' >
                             Home
                         </Link>
                     </li>
-                    <li onClick={this.toggleApp} className={this.state.application? 'dropdown show active' : 'dropdown show'}>
+                    <li className={this.props.firstPathName === 'application' ? 'dropdown show active' : 'dropdown show'}>
                         <Link to='/application' className='dropdown-toggle'>
                             Application
                         </Link>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <Link className="dropdown-item" to='/application/remote-employees'>Remote Employees</Link>
-                            <Link className="dropdown-item" to='/application/displaced-workers'>Displaced Workers</Link>
-                            <Link className="dropdown-item" to='/application/compliance'>Compliance</Link>
-                            <Link className="dropdown-item" to='/application/forms-library'>Forms Library</Link>
+                            <Link className={this.props.secondPathName === 'remote-employees' ? "dropdown-item active" : "dropdown-item"} to='/application/remote-employees'>Remote Employees</Link>
+                            <Link className={this.props.secondPathName === 'displaced-workers' ? "dropdown-item active" : "dropdown-item"} to='/application/displaced-workers'>Displaced Workers</Link>
+                            <Link className={this.props.secondPathName === 'compliance' ? "dropdown-item active" : "dropdown-item"} to='/application/compliance'>Compliance</Link>
+                            <Link className={this.props.secondPathName === 'forms-library' ? "dropdown-item active" : "dropdown-item"} to='/application/forms-library'>Forms Library</Link>
                         </div>
                     </li>
 
-                    <li onClick={this.toggleInd} className={this.state.industries ? 'dropdown show active' : 'dropdown show'}>
+                    <li className={this.props.firstPathName === 'industries' ? 'dropdown show active' : 'dropdown show'}>
                         <Link to='/industries' className='dropdown-toggle'>
                             Industries
                         </Link>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <Link className="dropdown-item" to='/industries/government'>Government</Link>
-                            <Link className="dropdown-item" to='/industries/construction'>Construction</Link>
-                            <Link className="dropdown-item" to='/industries/manufacturing'>Manufacturing</Link>
-                            <Link className="dropdown-item" to='/industries/associations'>Associations</Link>
-                            <Link className="dropdown-item" to='/industries/others'>Others</Link>
+                            <Link className={this.props.secondPathName === 'government' ? "dropdown-item active" : "dropdown-item"} to='/industries/government'>Government</Link>
+                            <Link className={this.props.secondPathName === 'construction' ? "dropdown-item active" : "dropdown-item"} to='/industries/construction'>Construction</Link>
+                            <Link className={this.props.secondPathName === 'manufacturing' ? "dropdown-item active" : "dropdown-item"} to='/industries/manufacturing'>Manufacturing</Link>
+                            <Link className={this.props.secondPathName === 'associations' ? "dropdown-item active" : "dropdown-item"} to='/industries/associations'>Associations</Link>
+                            <Link className={this.props.secondPathName === 'others' ? "dropdown-item active" : "dropdown-item"} to='/industries/others'>Others</Link>
                         </div>
                     </li>
 
-                    <li onClick={this.toggleRes} className={this.state.resources ? 'dropdown show active' : 'dropdown show'}>
+                    <li className={this.props.firstPathName === 'resources' ? 'dropdown show active' : 'dropdown show'}>
                         <Link to='/resources' className='dropdown-toggle'>
                             Resources
                         </Link>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <Link className="dropdown-item" to='/resources/our-principles'>Our Principles</Link>
-                            <Link className="dropdown-item" to='/resources/ar-w401k'>AR/WS/W401k</Link>
-                            <Link className="dropdown-item" to='/resources/news'>News & Events</Link>
-                            <Link className="dropdown-item" to='/resources/faq'>FAQ</Link>
-                            <Link className="dropdown-item" to='/resources/contact-us'>Contact Us</Link>
+                            <Link className={this.props.secondPathName === 'our-principles' ? "dropdown-item active" : "dropdown-item"} to='/resources/our-principles'>Our Principles</Link>
+                            <Link className={this.props.secondPathName === 'ar-w401k' ? "dropdown-item active" : "dropdown-item"} to='/resources/ar-w401k'>AR/WS/W401k</Link>
+                            <Link className={this.props.secondPathName === 'news' ? "dropdown-item active" : "dropdown-item"} to='/resources/news'>News & Events</Link>
+                            <Link className={this.props.secondPathName === 'faq' ? "dropdown-item active" : "dropdown-item"} to='/resources/faq'>FAQ</Link>
+                            <Link className={this.props.secondPathName === 'contact-us' ? "dropdown-item active" : "dropdown-item"} to='/resources/contact-us'>Contact Us</Link>
                         </div>
                     </li>
 
@@ -229,11 +190,11 @@ class TopMenu extends React.Component {
 
                     {/* checks to see if user is logged in and show login button or logout button */}
                     {this.props.isLoggedIn
-                    ?  
+                        ?
                         <li className='btn btn-lg' onClick={this.props.handleLog} id='logout'>
                             Logout
                         </li>
-                    :
+                        :
                         <a href='https://www.workerservices.net/login'>
                             <li className='btn btn-lg' id='login'>
                                 Login
