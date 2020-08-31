@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 import Tower from '../components/img/pics/industries.jpg';
 
@@ -132,38 +132,38 @@ class Login extends React.Component {
 
             await axios.post('http://127.0.0.1:8000/api/login', data)
                 .then(response => {
-                    if(response.data.token){
-                    let result = response.data
-                    this.props.setBearToken(result.token, result.user)
-                    this.props.handleLog()
-                    // console.log(response.data);
+                    if (response.data.token) {
+                        let result = response.data
+                        this.props.setBearToken(result.token, result.user)
+                        this.props.handleLog()
+                        // console.log(response.data);
 
-                    window.localStorage.setItem('token', JSON.stringify(result.token))
-                    window.localStorage.setItem('user', JSON.stringify(result.user))
-                    window.localStorage.setItem('isLoggedIn', JSON.stringify(true))
-                    // return response.data
-                    this.props.history.push('/')
-                    console.log('logged in succesfully')
+                        window.localStorage.setItem('token', JSON.stringify(result.token))
+                        window.localStorage.setItem('user', JSON.stringify(result.user))
+                        window.localStorage.setItem('isLoggedIn', JSON.stringify(true))
+                        // return response.data
+                        this.props.history.push('/')
+                        console.log('logged in succesfully')
                     }
-                    else{
+                    else {
                         alert('incorrect password')
                     }
                 })
                 .catch(function (error) {
-                    
-                    if(error.response.status === 422){
+
+                    if (error.response.status === 422) {
                         alert('email was not found')
                     }
-                    else if(error.response.status === 401){
+                    else if (error.response.status === 401) {
                         alert('incorrect password')
                     }
-                    else{
+                    else {
                         console.log(error);
                     }
                 })
 
-        } 
-        
+        }
+
         else {
             // console.error('Invalid Form')
             window.alert('Form was entered incorrectly, please try again')
@@ -177,39 +177,31 @@ class Login extends React.Component {
             <LoginStyle style={{ backgroundImage: `url(${Tower})` }}>
                 <div >
                     <div className='contained'>
-                        {this.props.isLoggedIn 
-                            ? 
-                            <div>
-                                <h1>You are LoggedIn</h1>
-                                <Link onClick={this.props.handleLog} to='/'  className='my-5 btn btn-lg btn-danger'>Logout</Link>
-                            </div>
-                            :
-                            <div>
-                                <h1>Login</h1>
+                        <div>
+                            <h1>Login</h1>
 
-                                <form onSubmit={this.handleSubmit} className='mt-3' noValidate>
+                            <form onSubmit={this.handleSubmit} className='mt-3' noValidate>
 
-                                    <div className="email form-group">
-                                        <label htmlFor='email'>Email address</label>
-                                        <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate/>
-                                        {errors.email.length > 0 &&
-                                            <span className='error text-danger'>{errors.email}</span>
-                                        }
-                                    </div>
+                                <div className="email form-group">
+                                    <label htmlFor='email'>Email address</label>
+                                    <input onChange={this.handleChange} name='email' type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" noValidate />
+                                    {errors.email.length > 0 &&
+                                        <span className='error text-danger'>{errors.email}</span>
+                                    }
+                                </div>
 
-                                    <div className="password form-group">
-                                        <label>Password</label>
-                                        <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate/>
-                                        {errors.password.length > 0 &&
-                                            <span className='error text-danger'>{errors.password}</span>
-                                        }
-                                    </div>
+                                <div className="password form-group">
+                                    <label>Password</label>
+                                    <input onChange={this.handleChange} name='password' type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" noValidate />
+                                    {errors.password.length > 0 &&
+                                        <span className='error text-danger'>{errors.password}</span>
+                                    }
+                                </div>
 
-                                    <input className='btn btn-lg' type="submit" value="Login" />
+                                <input className='btn btn-lg' type="submit" value="Login" />
 
-                                </form>
-                            </div>
-                        }
+                            </form>
+                        </div>
                     </div>
                 </div>
             </LoginStyle>

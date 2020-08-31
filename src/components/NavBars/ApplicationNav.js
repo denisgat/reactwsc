@@ -16,7 +16,7 @@ const BottomNav = () => {
                 </li>
                 <li>
                     <Link to='/application/displaced-workers'>
-                        Displaced Employees 
+                        Displaced Workers
                     </Link>
                 </li>
                 <li>

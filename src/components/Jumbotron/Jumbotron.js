@@ -25,7 +25,8 @@ const Jumbo = styled.div`
     }
 
     h1{
-        font-size: 3rem;
+        font-family: Georgia, serif !important;
+        font-size: 2.8rem;
         text-align: center;
         max-width: 50rem; 
         line-height: 1;
@@ -47,7 +48,7 @@ const Jumbotron = (props) => {
             <Jumbo >
                 <div id='HomePic' className='container-fluid' style={{ backgroundImage: `url(${props.jumboPic})` }}  >
                     <div className='text'>
-                        <h1>{props.jumboName}</h1>
+                        <h1><strong>{props.jumboName}</strong></h1>
                         {props.isLoggedIn
                         ?
                         <Link to={'/' + props.pageName + '/menuedit/' + props.pageId} className='modifiedbtn modifiedscript edit ml-2'>Edit</Link>

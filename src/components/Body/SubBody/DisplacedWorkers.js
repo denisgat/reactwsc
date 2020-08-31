@@ -3,17 +3,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 const DisplacedStyling = styled.div`
 `;
 
-const DisplacedEmployees = (props) => {
+const DisplacedWorkers = (props) => {
     return (
         <DisplacedStyling >
             <div className='subpage container'>
-                <p>
-                {props.menus[1].submenu[1].body}
-                </p>
+                <div
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.menus[1].submenu[1].body) }}
+                />
 
                 {props.isLoggedIn
                     ?
@@ -28,4 +29,4 @@ const DisplacedEmployees = (props) => {
 };
 
 
-export default DisplacedEmployees;
+export default DisplacedWorkers;

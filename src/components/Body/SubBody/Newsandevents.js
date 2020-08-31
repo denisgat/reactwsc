@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 const Styling = styled.div`
 `;
@@ -9,9 +10,9 @@ const Newsandevents = (props) => {
     return (
         <Styling >
             <div className='subpage container'>
-                <p>
-                    {props.menus[3].submenu[2].body}
-                </p>
+                <div
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.menus[3].submenu[2].body) }}
+                />
 
                 {props.isLoggedIn
                     ?

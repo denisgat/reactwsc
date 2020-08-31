@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 
 const Container = styled.span`
@@ -15,12 +16,11 @@ function HomeBody(props) {
                 <div className='fiverow mb-5'>
                     <div className='topscript'>
                         <div className='col-12'>
-                            <p>
-                                {props.menus[0].body}
-                            </p>
+                            <div
+                                dangerouslySetInnerHTML = {{ __html: DOMPurify.sanitize(props.menus[0].body)}}
+                             />
                             {props.isLoggedIn
                             ?
-
                             <Link to={'/home/menuedit/' + props.menus[0].id} className='modifiedscript modifiedbtn edit'>Edit</Link>
                             :
                             ''

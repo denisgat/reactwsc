@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 //pics
@@ -20,7 +20,8 @@ import governmentPic from './components/img/pics/government.jpg'
 //css
 import './App.scss'
 
-//components
+//components'
+import NotFound from './components/NotFound';
 import Login from './components/Login'
 import TopNavbar from './components/NavBars/TopNavbar';
 import Jumbotron from './components/Jumbotron/Jumbotron';
@@ -39,7 +40,7 @@ import ResourcesBody from './components/Body/ResourcesBody'
 import Footer from './components/Footer';
 
 import RemoteEmployees from './components/Body/SubBody/RemoteEmployees';
-import DisplacedEmployees from './components/Body/SubBody/DisplacedEmployees';
+import DisplacedWorkers from './components/Body/SubBody/DisplacedWorkers';
 import Compliance from './components/Body/SubBody/Compliance';
 import FormsLibrary from './components/Body/SubBody/FormsLibrary';
 import Government from './components/Body/SubBody/Government';
@@ -63,13 +64,15 @@ class App extends React.Component {
         this.state = {
             isLoggedIn: false,
             screenWidth: 0,
+            firstpathName: '',
+            secondpathName: '',
             token: '',
             user: {},
             menus: [],
-            submenus: []
         }
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.updatePathName = this.updatePathName.bind(this);
         this.handleLog = this.handleLog.bind(this);
         this.setBearToken = this.setBearToken.bind(this);
         this.setMenu = this.setMenu.bind(this);
@@ -89,19 +92,11 @@ class App extends React.Component {
                 console.log(error);
             })
 
-        let submenusCall = await axios.get('http://127.0.0.1:8000/api/allsubmenus')
-            .then(response => {
-                // handle success
-                //   console.log(response.data)
-                return response.data
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            })
 
         this.updateWindowDimensions();
+        this.updatePathName();
         window.addEventListener('resize', this.updateWindowDimensions)
+        window.addEventListener('click', this.updatePathName)
 
         // Setting up local Storage
         if (window.localStorage.token) {
@@ -115,10 +110,16 @@ class App extends React.Component {
         // setting menu to state 
         await this.setState({
             menus: menusCall,
-            submenus: submenusCall
         })
 
         // console.log(this.state)
+    }
+
+    updatePathName() {
+        this.setState({ 
+            firstpathName: window.location.pathname.split('/')[1],
+            secondpathName: window.location.pathname.split('/')[2] 
+        })
     }
 
     updateWindowDimensions() {
@@ -127,7 +128,7 @@ class App extends React.Component {
 
     async handleLog() {
         //Logs User out of backend
-        console.log(this.state)
+
         if (this.state.isLoggedIn === true) {
 
             const data = {
@@ -169,7 +170,7 @@ class App extends React.Component {
         })
     }
 
-    setMenu(newmenu){
+    setMenu(newmenu) {
         this.setState({
             menus: newmenu
         })
@@ -177,14 +178,17 @@ class App extends React.Component {
 
 
     render() {
-        if(this.state.menus.length > 0){
-            console.log(this.state)
+        console.log(this.state)
+        if (this.state.menus.length > 0) {
+            // console.log(this.state)
             return (
                 <BrowserRouter className='App'>
                     <TopNavbar
                         isLoggedIn={this.state.isLoggedIn}
                         screenWidth={this.state.screenWidth}
                         handleLog={this.handleLog}
+                        firstPathName={this.state.firstPathName}
+                        secondPathName={this.state.secondPathName}
                     />
                     <Switch>
                         {/* Home route */}
@@ -196,18 +200,24 @@ class App extends React.Component {
                                 pageId={this.state.menus[0].id}
                                 isLoggedIn={this.state.isLoggedIn}
                             />
-                            <HomeBody 
-                                isLoggedIn={this.state.isLoggedIn} 
-                                menus = {this.state.menus}
+                            <HomeBody
+                                isLoggedIn={this.state.isLoggedIn}
+                                menus={this.state.menus}
                             />
                         </Route>
 
                         <Route exact path='/home/menuedit/:id'>
-                            <MenuEdit 
-                                menus = {this.state.menus} 
-                                token = {this.state.token}
-                                setMenu = {this.setMenu}
-                            />
+                            {this.state.isLoggedIn
+                                ?
+                                <MenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
 
 
@@ -216,187 +226,232 @@ class App extends React.Component {
 
                         {/* Login route */}
                         <Route exact path='/login'>
-                            <Login
-                                isLoggedIn={this.state.isLoggedIn}
-                                screenWidth={this.state.screenWidth}
-                                handleLog={this.handleLog}
-                                setBearToken={this.setBearToken}
-                            />
+                            {this.state.isLoggedIn
+                                ?
+                                <Redirect to='/' />
+                                :
+                                <Login
+                                    isLoggedIn={this.state.isLoggedIn}
+                                    screenWidth={this.state.screenWidth}
+                                    handleLog={this.handleLog}
+                                    setBearToken={this.setBearToken}
+                                />
+                            }
                         </Route>
 
 
 
                         {/* Application Routes */}
                         <Route exact path='/application'>
-                            <Jumbotron 
-                                jumboPic={applicationPic} 
-                                jumboName={this.state.menus[1].header}  
+                            <Jumbotron
+                                jumboPic={applicationPic}
+                                jumboName={this.state.menus[1].header}
                                 pageName={this.state.menus[1].name.toLowerCase()}
                                 pageId={this.state.menus[1].id}
                                 isLoggedIn={this.state.isLoggedIn}
                             />
-                            <ApplicationBody menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}  />
+                            <ApplicationBody menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/remote-employees'>
-                            <Jumbotron 
-                                jumboPic={resourcesPic} 
-                                jumboName={this.state.menus[1].submenu[0].name} 
+                            <Jumbotron
+                                jumboPic={resourcesPic}
+                                jumboName={this.state.menus[1].submenu[0].name}
                             />
-                            <ApplicationNav menus = {this.state.menus}/>
-                            <RemoteEmployees menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ApplicationNav menus={this.state.menus} />
+                            <RemoteEmployees menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/displaced-workers'>
-                            <Jumbotron 
-                                jumboPic={displacedworkersPic} 
-                                jumboName={this.state.menus[1].submenu[1].name} 
+                            <Jumbotron
+                                jumboPic={displacedworkersPic}
+                                jumboName={this.state.menus[1].submenu[1].name}
                             />
-                            <ApplicationNav menus = {this.state.menus}/>
-                            <DisplacedEmployees menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ApplicationNav menus={this.state.menus} />
+                            <DisplacedWorkers menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/compliance'>
                             <Jumbotron jumboPic={compliancePic} jumboName={this.state.menus[1].submenu[2].name} />
-                            <ApplicationNav menus = {this.state.menus}/>
-                            <Compliance menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ApplicationNav menus={this.state.menus} />
+                            <Compliance menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/application/forms-library'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[1].submenu[3].name} />
-                            <ApplicationNav menus = {this.state.menus}/>
-                            <FormsLibrary menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ApplicationNav menus={this.state.menus} />
+                            <FormsLibrary menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 
                         <Route exact path='/application/menuedit/:id'>
-                            <MenuEdit 
-                                menus = {this.state.menus} 
-                                token = {this.state.token}
-                                setMenu = {this.setMenu}
-                            />
+                            {this.state.isLoggedIn
+                                ?
+                                <MenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
                         <Route exact path='/application/submenuedit/:id'>
-                            <SubMenuEdit 
-                                menus = {this.state.menus} 
-                                token = {this.state.token}
-                                setMenu = {this.setMenu}
-                            />
+                            {this.state.isLoggedIn
+                                ?
+                                <SubMenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
+                                />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
 
 
 
                         {/* Industries Routes */}
                         <Route exact path='/industries'>
-                            <Jumbotron 
-                                jumboPic={industriesPic} 
+                            <Jumbotron
+                                jumboPic={industriesPic}
                                 jumboName={this.state.menus[2].header}
                                 pageName={this.state.menus[2].name.toLowerCase()}
                                 pageId={this.state.menus[2].id}
-                                isLoggedIn={this.state.isLoggedIn} 
+                                isLoggedIn={this.state.isLoggedIn}
                             />
-                            <IndustriesBody isLoggedIn={this.state.isLoggedIn}  menus = {this.state.menus}/>
+                            <IndustriesBody isLoggedIn={this.state.isLoggedIn} menus={this.state.menus} />
                         </Route>
                         <Route path='/industries/government'>
                             <Jumbotron jumboPic={governmentPic} jumboName={this.state.menus[2].submenu[0].name} />
-                            <IndustriesNav menus = {this.state.menus}/>
-                            <Government menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <IndustriesNav menus={this.state.menus} />
+                            <Government menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/construction'>
                             <Jumbotron jumboPic={constructionPic} jumboName={this.state.menus[2].submenu[1].name} />
-                            <IndustriesNav menus = {this.state.menus}/>
-                            <Construction menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <IndustriesNav menus={this.state.menus} />
+                            <Construction menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/manufacturing'>
                             <Jumbotron jumboPic={manufacturingPic} jumboName={this.state.menus[2].submenu[2].name} />
-                            <IndustriesNav menus = {this.state.menus}/>
-                            <Manufacturing menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <IndustriesNav menus={this.state.menus} />
+                            <Manufacturing menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/associations'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[2].submenu[3].name} />
-                            <IndustriesNav menus = {this.state.menus}/>
-                            <Associations menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <IndustriesNav menus={this.state.menus} />
+                            <Associations menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/industries/others'>
                             <Jumbotron jumboPic={othersPic} jumboName={this.state.menus[2].submenu[4].name} />
-                            <IndustriesNav menus = {this.state.menus}/>
-                            <Others menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <IndustriesNav menus={this.state.menus} />
+                            <Others menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 
                         <Route exact path='/industries/menuedit/:id'>
-                            <MenuEdit 
-                                    menus = {this.state.menus} 
-                                    token = {this.state.token}
-                                    setMenu = {this.setMenu}
+                            {this.state.isLoggedIn
+                                ?
+                                <MenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
                                 />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
                         <Route exact path='/industries/submenuedit/:id'>
-                            <SubMenuEdit 
-                                    menus = {this.state.menus} 
-                                    token = {this.state.token}
-                                    setMenu = {this.setMenu}
+                            {this.state.isLoggedIn
+                                ?
+                                <SubMenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
                                 />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
 
 
                         {/* Resources Routes */}
                         <Route exact path='/resources'>
-                            <Jumbotron 
-                                jumboPic={resourcesPic} 
-                                jumboName={this.state.menus[3].header} 
+                            <Jumbotron
+                                jumboPic={resourcesPic}
+                                jumboName={this.state.menus[3].header}
                                 pageName={this.state.menus[3].name.toLowerCase()}
                                 pageId={this.state.menus[3].id}
                                 isLoggedIn={this.state.isLoggedIn}
                             />
-                            <ResourcesBody isLoggedIn={this.state.isLoggedIn}  menus = {this.state.menus}/>
+                            <ResourcesBody isLoggedIn={this.state.isLoggedIn} menus={this.state.menus} />
                         </Route>
                         <Route path='/resources/our-principles'>
                             <Jumbotron jumboPic={ourprinciplesPic} jumboName={this.state.menus[3].submenu[0].name} />
-                            <ResourcesNav menus = {this.state.menus}/>
-                            <Ourprinciples menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ResourcesNav menus={this.state.menus} />
+                            <Ourprinciples menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/ar-w401k'>
                             <Jumbotron jumboPic={arw401kPic} jumboName={this.state.menus[3].submenu[1].name} />
-                            <ResourcesNav menus = {this.state.menus}/>
-                            <Arwsw401k menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ResourcesNav menus={this.state.menus} />
+                            <Arwsw401k menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/news'>
-                            <Jumbotron jumboPic={compliancePic} jumboName={this.state.menus[3].submenu[2].name}/>
-                            <ResourcesNav menus = {this.state.menus}/>
-                            <Newsandevents menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <Jumbotron jumboPic={compliancePic} jumboName={this.state.menus[3].submenu[2].name} />
+                            <ResourcesNav menus={this.state.menus} />
+                            <Newsandevents menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/faq'>
-                            <Jumbotron jumboPic={arw401kPic} jumboName={this.state.menus[3].submenu[3].name}/>
-                            <ResourcesNav menus = {this.state.menus}/>
-                            <Faq menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <Jumbotron jumboPic={arw401kPic} jumboName={this.state.menus[3].submenu[3].name} />
+                            <ResourcesNav menus={this.state.menus} />
+                            <Faq menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
                         <Route path='/resources/contact-us'>
                             <Jumbotron jumboPic={resourcesPic} jumboName={this.state.menus[3].submenu[4].name} />
-                            <ResourcesNav menus = {this.state.menus}/>
-                            <Contactus menus = {this.state.menus} isLoggedIn={this.state.isLoggedIn}/>
+                            <ResourcesNav menus={this.state.menus} />
+                            <Contactus menus={this.state.menus} isLoggedIn={this.state.isLoggedIn} />
                         </Route>
 
                         <Route exact path='/resources/menuedit/:id'>
-                            <MenuEdit 
-                                    menus = {this.state.menus} 
-                                    token = {this.state.token}
-                                    setMenu = {this.setMenu}
+                            {this.state.isLoggedIn
+                                ?
+                                <MenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
                                 />
+                                :
+                                <Redirect to='/' />
+                            }
                         </Route>
                         <Route exact path='/resources/submenuedit/:id'>
-                            <SubMenuEdit 
-                                    menus = {this.state.menus} 
-                                    token = {this.state.token}
-                                    setMenu = {this.setMenu}
+                            {this.state.isLoggedIn
+                                ?
+                                <SubMenuEdit
+                                    menus={this.state.menus}
+                                    token={this.state.token}
+                                    setMenu={this.setMenu}
+                                    isLoggedIn={this.state.isLoggedIn}
                                 />
+                                :
+                                <Redirect to='/' />
+                            }
+                        </Route>
+                        <Route >
+                            <NotFound />
                         </Route>
                     </Switch>
                     <Footer />
                 </BrowserRouter>
             )
         }
-        else{
-            return(
+
+        else {
+            return (
                 <BrowserRouter className='App'>
                     <TopNavbar
-                    isLoggedIn={this.state.isLoggedIn}
-                    screenWidth={this.state.screenWidth}
-                    handleLog={this.handleLog}
+                        isLoggedIn={this.state.isLoggedIn}
+                        screenWidth={this.state.screenWidth}
+                        handleLog={this.handleLog}
                     />
                     <h1 className='mt-5 text-center'>Loading...</h1>
                 </BrowserRouter>

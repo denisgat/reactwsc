@@ -95,7 +95,9 @@ const TopNavbar = (props) => {
                     ?<MenuButton /> 
                     :<TopMenu 
                         isLoggedIn = {props.isLoggedIn} 
-                        handleLog={props.handleLog} 
+                        handleLog={props.handleLog}
+                        firstPathName = {props.firstPathName}
+                        secondPathName = {props.secondPathName} 
                     />
                     }
                 </Nav>
